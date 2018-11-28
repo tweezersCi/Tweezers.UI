@@ -2,6 +2,18 @@
 
 > Tweezers UI module
 
+## Install Vue
+
+```bash
+# 1. install node js
+
+# 2. install vue
+npm install -g vue
+
+# 3. install vue-cli
+npm install vue-cli
+```
+
 ## Build Setup
 
 ``` bash
