@@ -7,11 +7,11 @@ export default {
   props: {
     item_name: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   mounted() {
-    console.log("hello");
-  }
+    console.log('hello');
+  },
 };
 </script>
