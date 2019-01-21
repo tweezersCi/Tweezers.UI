@@ -9,12 +9,7 @@
       <v-toolbar-title>Tweezers UI</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <v-container fluid>
-        <v-layout align-center justify-center>
-          <v-flex xs10>
-          </v-flex>
-        </v-layout>
-      </v-container>
+      <router-view></router-view>
     </v-content>
     <v-footer :inset="footer.inset" app>
       <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
