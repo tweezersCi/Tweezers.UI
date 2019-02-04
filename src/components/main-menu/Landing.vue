@@ -1,10 +1,9 @@
 <template>
   <v-app id="sandbox" :dark="dark">
     <SideMenu ref="sideMenu"/>
-    <v-toolbar :clipped-left="primaryDrawer.clipped" app absolute>
+    <v-toolbar :clipped-left="true" app absolute>
       <v-toolbar-side-icon
-        v-if="primaryDrawer.type !== 'permanent'"
-        @click.stop="changeSideMenu()"
+        @click.stop="toggleSideMenu()"
       ></v-toolbar-side-icon>
       <v-toolbar-title>Tweezers UI</v-toolbar-title>
     </v-toolbar>
@@ -12,7 +11,10 @@
       <router-view></router-view>
     </v-content>
     <v-footer :inset="footer.inset" app>
-      <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
+      <v-spacer/>
+      <span class="px-2">&copy; {{ new Date().getFullYear() }} powered by</span>
+      <svg-icon name="tweez" width="20" height="20" color="#FFFFFF"></svg-icon>
+      <span class="px-1"/>
     </v-footer>
   </v-app>
 </template>
@@ -25,24 +27,15 @@ export default {
     SideMenu,
   },
   data: () => ({
-    pageInfo: [],
     dark: true,
-    drawers: ['Default (no property)', 'Permanent', 'Temporary'],
-    primaryDrawer: {
-      model: null,
-      type: 'default (no property)',
-      clipped: true,
-      floating: false,
-      mini: false,
-    },
     footer: {
-      inset: false,
+      inset: true,
     },
     methods: {
     },
   }),
   methods: {
-    changeSideMenu() {
+    toggleSideMenu() {
       this.$refs.sideMenu.changeModel();
     },
   },

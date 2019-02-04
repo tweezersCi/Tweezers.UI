@@ -20,20 +20,24 @@ export default {
   props: {
     index: {
       type: Number,
-      required: true,
+      required: true
     },
     value: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
     goToGrid() {
-      this.$router.push({
-        name: 'single_item',
-        params: { item_name: this.value.name },
-      });
-    },
-  },
+      if (this.value.main_menu) {
+        this.$router.push("/");
+      } else {
+        this.$router.push({
+          name: "single_item",
+          params: { item_name: this.value.name }
+        });
+      }
+    }
+  }
 };
 </script>

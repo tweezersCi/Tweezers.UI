@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import TweezersMultipleItems from './components/multiple-item/TweezersMultipleItems.vue';
+import MultipleItemsView from './components/multiple-item/MultipleItemsView.vue';
+import LandingSubView from './components/main-menu/LandingSubView.vue';
 
 Vue.use(Router);
 
@@ -12,12 +13,12 @@ const router = new Router({
     {
       path: '/',
       name: 'app',
-      component: null,
+      component: LandingSubView,
     },
     {
       path: '/:item_name',
       name: 'single_item',
-      component: TweezersMultipleItems,
+      component: MultipleItemsView,
       props: true,
     },
   ],

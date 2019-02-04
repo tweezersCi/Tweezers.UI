@@ -1,14 +1,14 @@
 <template>
-  <MainMenu/>
+  <Landing/>
 </template>
 
 <script>
-import MainMenu from './components/main-menu/MainMenu.vue';
+import Landing from './components/main-menu/Landing.vue';
 
 export default {
   name: 'App',
   components: {
-    MainMenu,
+    Landing,
   },
   data() {
     return {
@@ -17,3 +17,37 @@ export default {
   },
 };
 </script>
+
+<style scope="global">
+.svg-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    color: inherit;
+    vertical-align: middle;
+    fill: none;
+    stroke: currentColor;
+}
+ 
+.svg-fill {
+    fill: currentColor;
+    stroke: none;
+}
+ 
+.svg-up {
+    /* default */
+    transform: rotate(0deg);
+}
+ 
+.svg-right {
+    transform: rotate(90deg);
+}
+ 
+.svg-down {
+    transform: rotate(180deg);
+}
+ 
+.svg-left {
+    transform: rotate(-90deg);
+}
+</style>
