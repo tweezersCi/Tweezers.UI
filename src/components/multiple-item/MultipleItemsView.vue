@@ -1,17 +1,31 @@
 <template>
-  <h1>Hello {{item_name}}</h1>
+  <GridView :key="randomKey()" v-bind:item="this.item"></GridView>
 </template>
 
 <script>
+import GridView from './layouts/GridView.vue';
+
 export default {
-  props: {
-    item_name: {
-      type: String,
-      required: true
-    }
+  components: {
+    GridView,
   },
+
+  props: {
+    itemName: {
+      type: String,
+      required: true,
+    },
+    item: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  methods: {
+    randomKey() { return Math.round(Math.random() * 1000); },
+  },
+
   mounted() {
-    console.log("hello");
-  }
+  },
 };
 </script>

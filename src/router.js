@@ -16,8 +16,8 @@ const router = new Router({
       component: LandingSubView,
     },
     {
-      path: '/:item_name',
-      name: 'single_item',
+      path: '/:itemName',
+      name: 'multiple_items_view',
       component: MultipleItemsView,
       props: true,
     },

@@ -28,25 +28,25 @@ export default {
     fill: none;
     stroke: currentColor;
 }
- 
+
 .svg-fill {
     fill: currentColor;
     stroke: none;
 }
- 
+
 .svg-up {
     /* default */
     transform: rotate(0deg);
 }
- 
+
 .svg-right {
     transform: rotate(90deg);
 }
- 
+
 .svg-down {
     transform: rotate(180deg);
 }
- 
+
 .svg-left {
     transform: rotate(-90deg);
 }
