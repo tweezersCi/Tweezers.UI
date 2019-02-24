@@ -2,7 +2,7 @@
   <div>
     <v-divider :inset="value.inset" :key="index"></v-divider>
 
-    <v-list-tile :key="value.title" avatar ripple @click="goToGrid()">
+    <v-list-tile :key="value.title" avatar ripple @click="cat()">
       <v-list-tile-avatar color="white">
         <v-icon color="purple">{{ value.entityData.iconName }}</v-icon>
       </v-list-tile-avatar>
@@ -20,20 +20,12 @@ export default {
   props: {
     index: {
       type: Number,
-      required: true
+      required: true,
     },
     value: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  methods: {
-    goToGrid() {
-      this.$router.push({
-        name: "single_item",
-        params: { item_name: this.value.name }
-      });
-    }
-  }
 };
 </script>
