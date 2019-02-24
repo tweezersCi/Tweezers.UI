@@ -22,31 +22,31 @@
 </template>
 
 <script>
-import SideMenuItem from "./SideMenuItem.vue";
+import SideMenuItem from './SideMenuItem.vue';
 
-const axios = require("axios");
+const axios = require('axios');
 
 export default {
   components: {
-    SideMenuItem
+    SideMenuItem,
   },
   props: {},
   data: () => ({
     model: false,
     pageInfo: [],
     footer: {
-      inset: false
-    }
+      inset: false,
+    },
   }),
   mounted() {
-    axios.get("https://localhost:44359/api/tweezers").then(response => {
+    axios.get('https://localhost:44359/api/tweezers').then((response) => {
       this.pageInfo = response.data;
     });
   },
   methods: {
     changeModel() {
       this.model = !this.model;
-    }
-  }
+    },
+  },
 };
 </script>
