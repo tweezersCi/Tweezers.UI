@@ -1,0 +1,6 @@
+<span *ngIf="!loading && valid"><h1>{{gridName}}</h1></span>
+<span *ngIf="!loading && !valid"><page-not-found></page-not-found></span>
+
+<span *ngFor="let item of entities">
+    <div (click)="clickItem(item)">{{item.name}}</div>
+</span>
