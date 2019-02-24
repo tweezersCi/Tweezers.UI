@@ -17,4 +17,8 @@ export class SideMenuItemComponent extends BaseComponent {
         //Add 'implements AfterContentInit' to the class.
         TweezersColorPicker.changeColor(this.sideMenuItem);
     }
+
+    navigateTo(referenceLink: string): void {
+        this.router.navigate([`/${referenceLink}`]);
+    }
 }
