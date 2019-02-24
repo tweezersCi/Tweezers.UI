@@ -19,13 +19,13 @@
 export default {
   props: {
     index: {
-      type: Number,
-      required: true,
+        type: Number,
+        required: true
     },
     value: {
       type: Object,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 };
 </script>
