@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import SideMenu from './SideMenu.vue';
+import SideMenu from "./SideMenu.vue";
 
 export default {
   components: {
@@ -44,12 +44,12 @@ export default {
       inset: false,
     },
     methods: {
-    },
+    }
   }),
   methods: {
     changeSideMenu() {
       this.$refs.sideMenu.changeModel();
-    },
-  },
+    }
+  }
 };
 </script>
