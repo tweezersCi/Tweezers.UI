@@ -1,0 +1,28 @@
+.layout-container {
+    position: absolute;
+    top: 63px;
+    bottom: 63px;
+    left: 0;
+    right: 0;
+}
+  
+.layout-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+}
+  
+.layout-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.layout-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

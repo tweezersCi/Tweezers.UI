@@ -1,0 +1,7 @@
+<div *ngIf="item && !loading">
+    <div *ngFor="let field of fields">
+        <span>
+            <div style="color: red">{{ headers[field] }}</div><span>{{ item[field] != null ? item[field] : 'empty :(' }}</span>
+        </span>
+    </div>
+</div>
