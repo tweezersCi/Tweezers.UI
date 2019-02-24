@@ -31,10 +31,6 @@ export class SideMenuComponent extends BaseComponent {
         });
     }
 
-    navigateTo(referenceLink: string): void {
-        this.router.navigate([`/${referenceLink}`]);
-    }
-
     ngAfterContentInit(): void {
         //Called after ngOnInit when the component's or directive's content has been initialized.
         //Add 'implements AfterContentInit' to the class.
