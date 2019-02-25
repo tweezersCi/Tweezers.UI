@@ -17,6 +17,7 @@ import { LandingModule } from './tweezers/modules/landing/LandingModule';
 import { AppMaterialModule } from './tweezers/material/AppMaterialModule';
 import { SideMenuModule } from './tweezers/modules/side-menu/SideMenuModule';
 import { BaseComponent } from './tweezers/modules/base-component/BaseComponent';
+import { TweezersInfraModule } from './tweezers/modules/infra/InfraModule';
 
 
 @NgModule({
@@ -32,6 +33,8 @@ import { BaseComponent } from './tweezers/modules/base-component/BaseComponent';
     BrowserModule,
     CommonModule,
     
+    TweezersInfraModule,
+
     AppRoutingModule,
     HttpClientModule,
     GridModule,

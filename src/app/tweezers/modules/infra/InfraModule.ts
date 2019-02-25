@@ -1,12 +1,10 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppMaterialModule } from '../../material/AppMaterialModule';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { SideMenuComponent } from './side-menu/SideMenuComponent';
-import { SideMenuItemComponent } from './side-menu-item/SideMenuItemComponent';
-import { TweezersInfraModule } from '../infra/InfraModule';
+import { TweezersIconComponent } from './tweezers-icon/TweezersIconComponent';
 
 @NgModule({
     imports: [
@@ -16,9 +14,8 @@ import { TweezersInfraModule } from '../infra/InfraModule';
         FormsModule,
         ReactiveFormsModule,
         BrowserModule,
-        TweezersInfraModule,
     ],
-    declarations: [SideMenuComponent, SideMenuItemComponent],
-    exports: [SideMenuComponent, SideMenuItemComponent]
+    declarations: [TweezersIconComponent],
+    exports: [TweezersIconComponent]
 })
-export class SideMenuModule {}
+export class TweezersInfraModule {}
