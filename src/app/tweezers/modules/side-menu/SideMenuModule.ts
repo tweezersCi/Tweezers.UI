@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { SideMenuComponent } from './side-menu/SideMenuComponent';
 import { SideMenuItemComponent } from './side-menu-item/SideMenuItemComponent';
-import { TweezersInfraModule } from '../infra/InfraModule';
+import { TweezersInfraModule } from '../infra/TweezersInfraModule';
 
 @NgModule({
     imports: [

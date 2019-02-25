@@ -17,7 +17,7 @@ import { LandingModule } from './tweezers/modules/landing/LandingModule';
 import { AppMaterialModule } from './tweezers/material/AppMaterialModule';
 import { SideMenuModule } from './tweezers/modules/side-menu/SideMenuModule';
 import { BaseComponent } from './tweezers/modules/base-component/BaseComponent';
-import { TweezersInfraModule } from './tweezers/modules/infra/InfraModule';
+import { TweezersInfraModule } from './tweezers/modules/infra/TweezersInfraModule';
 
 
 @NgModule({
