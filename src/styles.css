@@ -13,3 +13,7 @@ body {
 .mr10 {
     margin-right: 10px;
 }
+
+.pointer {
+    cursor: pointer;
+}
