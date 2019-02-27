@@ -46,7 +46,7 @@ export class GridComponent extends BaseComponent{
 
     loadGridData(refLink: string): any {
         this.refLink = refLink;
-        this.tweezCache.getEntityMetadata(refLink).then((res) => {
+        const entityMetadataPromise = this.tweezCache.getEntityMetadata(refLink).then((res) => {
             this.gridName = res.entityData.displayName;
             this.titleModule.setTitle(`${this.gridName} - Tweezers UI`);
             this.headers = {};
@@ -67,9 +67,12 @@ export class GridComponent extends BaseComponent{
             console.log("headers", this.headers);
         });
 
-        this.tweezApi.getEntities(refLink).then((res) => {
+        const entitiesPromise = this.tweezApi.getEntities(refLink).then((res) => {
             this.entities = res;
             console.log("items", this.entities);
+        });
+
+        Promise.all([entitiesPromise, entityMetadataPromise]).then((res) => {
             this.loading = false;
         });
     }
