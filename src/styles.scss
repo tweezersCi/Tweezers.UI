@@ -1,0 +1,26 @@
+/* Color Imports */
+/* @import './assets/colors/style_colors.css'; */
+
+
+@import '../src/assets/colors/indigo-pink.scss';
+
+/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.ml10 {
+    margin-left: 10px;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.pointer {
+    cursor: pointer;
+}
