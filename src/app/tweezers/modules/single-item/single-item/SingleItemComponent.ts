@@ -10,7 +10,8 @@ declare let window;
 
 @Component({
     selector: 'tweezers-single-item',
-    templateUrl: "single-item.component.html"
+    templateUrl: "single-item.component.html",
+    styleUrls: ["single-item.component.css"],
 })
 export class SingleItemComponent extends BaseComponent {
     loading: boolean;
@@ -64,6 +65,8 @@ export class SingleItemComponent extends BaseComponent {
                 });
             }
             this.fields = Object.keys(this.headers);
+            console.log("headers", this.headers);
+            console.log("fields", this.fields);
         });
 
         Promise.all([entityPromise, metadataPromise]).then((res) => {

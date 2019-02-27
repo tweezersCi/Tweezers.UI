@@ -1,7 +1,11 @@
 <div *ngIf="item && !loading">
-    <div *ngFor="let field of fields">
-        <span>
-            <div style="color: red">{{ headers[field] }}</div><span>{{ item[field] != null ? item[field] : 'empty :(' }}</span>
-        </span>
-    </div>
+  <div *ngFor="let field of fields">
+    <form class="tweezers-single-item-form">
+      <tweezers-text-box
+        [prop]="field"
+        [header]="headers[field]"
+        [item]="item"
+      ></tweezers-text-box>
+    </form>
+  </div>
 </div>

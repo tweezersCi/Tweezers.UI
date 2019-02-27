@@ -18,6 +18,7 @@ import { AppMaterialModule } from './tweezers/material/AppMaterialModule';
 import { SideMenuModule } from './tweezers/modules/side-menu/SideMenuModule';
 import { BaseComponent } from './tweezers/modules/base-component/BaseComponent';
 import { TweezersInfraModule } from './tweezers/modules/infra/TweezersInfraModule';
+import { SingleItemControlsModule } from './tweezers/modules/single-item-controls/SingleItemControlsModule';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { TweezersInfraModule } from './tweezers/modules/infra/TweezersInfraModul
     LayoutModule,
     PageNotFoundModule,
     LandingModule,
-    SideMenuModule
+    SideMenuModule,
+    SingleItemControlsModule,
   ],
   providers: [TweezersApi, HttpClient],
   bootstrap: [AppComponent]
