@@ -1,6 +1,5 @@
 import { Component, ViewChild, Input } from '@angular/core';
 import { BaseComponent } from '../../base-component/BaseComponent';
-import { TweezersColorPicker } from 'src/app/tweezers/utils/tweezers-color-picker';
 import { MatListItem } from '@angular/material';
 
 @Component({
@@ -15,7 +14,6 @@ export class SideMenuItemComponent extends BaseComponent {
     ngAfterContentInit(): void {
         //Called after ngOnInit when the component's or directive's content has been initialized.
         //Add 'implements AfterContentInit' to the class.
-        TweezersColorPicker.changeColor(this.sideMenuItem);
     }
 
     navigateTo(referenceLink: string): void {

@@ -1,11 +1,11 @@
 <ng-container>
-    <mat-toolbar #header class="layout-header COLOR_TOKEN">
+    <mat-toolbar #header class="layout-header">
         <mat-icon class="pointer mr10" (click)="sidenav.toggle()">{{ sidenav.opened ? 'chevron_left' : 'menu' }}</mat-icon>
-        Header
+        Tweezers UI
     </mat-toolbar>
 
     <mat-sidenav-container class="layout-container">
-        <mat-sidenav #sidenav mode="side" opened class="layout-sidenav COLOR_TOKEN" [fixedInViewport]="false"
+        <mat-sidenav #sidenav mode="side" opened class="layout-sidenav" [fixedInViewport]="false"
             [fixedTopGap]="0" [fixedBottomGap]="0">
             <tweezers-side-menu></tweezers-side-menu>
         </mat-sidenav>
@@ -15,5 +15,5 @@
         </mat-sidenav-content>
     </mat-sidenav-container>
 
-    <mat-toolbar #footer class="layout-footer COLOR_TOKEN"><p>Powered by Tweezers!</p></mat-toolbar>
+    <mat-toolbar #footer class="layout-footer"><p class="mat-caption">Powered by Tweezers</p></mat-toolbar>
 </ng-container>
