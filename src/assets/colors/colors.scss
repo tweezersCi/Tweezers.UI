@@ -1,0 +1,41 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$black: #000000;
+
+$primary: mat-palette($primaryPalette);
+$primary-darker: mat-palette($primaryPalette, 800, 900);
+$accent:  mat-palette($secondaryPalette, A200, A100, A400);
+
+$theme: mat-light-theme($primary, $accent);
+$darker-theme: mat-light-theme($primary-darker, $accent);
+
+@include angular-material-theme($theme);
+@include mat-toolbar-theme($darker-theme);
+
+.layout-header, .layout-footer {
+    background: mat-color($primaryPalette, 900);
+    color: mat-color($primaryPalette, 50);
+}
+
+.layout-sidenav {
+    background: mat-color($primaryPalette, 500);;
+}
+
+.side_menu_list_item {
+    color: mat-color($primaryPalette, 50) !important;
+}
+
+.side_menu_list_item:hover {
+    color: mat-color($primaryPalette, 100) !important;
+}
+
+tr.element-row:hover {
+    background: mat-color($primaryPalette, 50);
+}
+
+
+.mat-header-cell {
+    color: mat-color($primaryPalette, 900);
+}

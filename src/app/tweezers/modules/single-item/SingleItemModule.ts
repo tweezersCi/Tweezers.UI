@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { PageNotFoundModule } from '../page-not-found-module/PageNotFoundModule';
 import { SingleItemComponent } from './single-item/SingleItemComponent';
 import { SingleItemControlsModule } from '../single-item-controls/SingleItemControlsModule';
+import { TweezersInfraModule } from '../infra/TweezersInfraModule';
+import { AppMaterialModule } from '../../material/AppMaterialModule';
 
 @NgModule({
     imports: [
         CommonModule,
         PageNotFoundModule,
         SingleItemControlsModule,
+        TweezersInfraModule,
+        AppMaterialModule
     ],
     declarations: [SingleItemComponent],
     exports: [SingleItemComponent],

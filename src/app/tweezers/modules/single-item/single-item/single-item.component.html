@@ -1,23 +1,45 @@
 <div *ngIf="item && !loading">
+  <mat-toolbar color="primary">
+    <tweezers-icon
+      [name]="entityData.iconName"
+      class="pointer mr10 mt10"
+      (click)="navigateToFather()"
+    ></tweezers-icon>
+    <span class="pointer" (click)="navigateToFather()">{{
+      entityData.displayName
+    }}</span>
+
+    <tweezers-icon
+      [name]="'keyboard_arrow_right'"
+      class="ml10 mr10 mt10"
+    ></tweezers-icon>
+    {{ item["name"] }}
+  </mat-toolbar>
+
   <form class="tweezers-single-item-form">
     <div *ngFor="let field of fields">
-      <tweezers-text-box *ngIf="!entityData[field].values && entityData[field].type !== 'Boolean'"
+      <tweezers-text-box
+        *ngIf="
+          !propertyData[field].values && propertyData[field].type !== 'Boolean'
+        "
         [prop]="field"
-        [header]="entityData[field].displayName"
+        [header]="propertyData[field].displayName"
         [item]="item"
       ></tweezers-text-box>
 
-      <tweezers-slider *ngIf="entityData[field].type === 'Boolean'"
+      <tweezers-slider
+        *ngIf="propertyData[field].type === 'Boolean'"
         [prop]="field"
-        [header]="entityData[field].displayName"
+        [header]="propertyData[field].displayName"
         [item]="item"
       ></tweezers-slider>
 
-      <tweezers-dropdown *ngIf="entityData[field].values"
+      <tweezers-dropdown
+        *ngIf="propertyData[field].values"
         [prop]="field"
-        [fieldData]="entityData[field]"
+        [fieldData]="propertyData[field]"
         [item]="item"
-        [allowNone]="entityData[field].type !== 'Enum'"
+        [allowNone]="propertyData[field].type !== 'Enum'"
       ></tweezers-dropdown>
     </div>
   </form>

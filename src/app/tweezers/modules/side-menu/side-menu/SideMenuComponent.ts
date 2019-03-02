@@ -1,8 +1,6 @@
-import { Component, ViewChildren, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { ClassBaseMetadata } from 'src/app/tweezers/interfaces/class-base-metadata';
 import { BaseComponent } from '../../base-component/BaseComponent';
-import { MatList, MatListItem } from '@angular/material';
-import { TweezersColorPicker } from 'src/app/tweezers/utils/tweezers-color-picker';
 
 declare let window;
 

@@ -28,14 +28,19 @@ export class TweezersCache {
     }
 
     async getEntityMetadata(refLink: string): Promise<ClassMetadata> {
-        const parts = refLink.split('/').filter(el => el);
-        const refLinkKey = parts.find(el => true);
+        const refLinkKey = this.getBaseLinkKey(refLink);
         if (!this.entityMetadataCache || !this.entityMetadataCache[refLinkKey]) {
             const refLinkBaseUrl = `/${refLinkKey}`;
-            console.log(refLinkBaseUrl);
+            console.log("base", refLinkBaseUrl);
             this.entityMetadataCache[refLinkKey] = await this.api.getEntityMetadata(refLinkBaseUrl);
         }
 
         return Promise.resolve(this.entityMetadataCache[refLinkKey]);
+    }
+
+    getBaseLinkKey(refLink: string) {
+        const parts = refLink.split('/').filter(el => el);
+        const refLinkKey = parts.find(el => true);
+        return refLinkKey;
     }
 }
