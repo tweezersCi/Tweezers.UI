@@ -25,3 +25,12 @@ $theme: mat-light-theme($primary, $accent);
 .side_menu_list_item:hover {
     color: #8C9EFF !important;
 }
+
+tr.element-row:hover {
+    background: #E8EAF6;
+}
+
+
+.mat-header-cell {
+    color: #000000;
+}

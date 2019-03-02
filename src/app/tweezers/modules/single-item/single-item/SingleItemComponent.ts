@@ -56,7 +56,6 @@ export class SingleItemComponent extends BaseComponent {
 
         const metadataPromise = this.tweezCache.getEntityMetadata(url).then(res => {
             this.entityData = {};
-            window.eData = res;
             if (res) {
                 res.propertyData.forEach(pd => {
                     const name = pd.propertyName;

@@ -8,7 +8,8 @@ import {
   MatIconModule,
   MatListModule,
   MatDividerModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatTableModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -25,7 +26,8 @@ import { CommonModule } from "@angular/common";
     MatIconModule,
     MatDividerModule,
     MatListModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule
   ],
   exports: [
     MatInputModule,
@@ -37,7 +39,8 @@ import { CommonModule } from "@angular/common";
     MatIconModule,
     MatDividerModule,
     MatListModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule
   ]
 })
 export class AppMaterialModule {}
