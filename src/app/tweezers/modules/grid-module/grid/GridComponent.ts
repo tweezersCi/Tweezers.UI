@@ -6,9 +6,12 @@ import { TweezersCache } from 'src/app/tweezers/utils/tweezers-cache';
 import { Title } from '@angular/platform-browser';
 import { BaseComponent } from '../../base-component/BaseComponent';
 
+declare let window;
+
 @Component({
     selector: 'tweezers-grid',
-    templateUrl: "grid.component.html"
+    templateUrl: "grid.component.html",
+    styleUrls: ["grid.component.css"]
 })
 export class GridComponent extends BaseComponent{
     routerEventsSubscription: Subscription;
@@ -18,9 +21,12 @@ export class GridComponent extends BaseComponent{
 
     entities: any;
     headers: any;
+    fields: string[];
+    displayedColumns: string[];
     idFieldName: string;
     refLink: string;
     gridName: string;
+    iconName: string;
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
         protected titleModule: Title) {
@@ -48,7 +54,9 @@ export class GridComponent extends BaseComponent{
         this.refLink = refLink;
         const entityMetadataPromise = this.tweezCache.getEntityMetadata(refLink).then((res) => {
             this.gridName = res.entityData.displayName;
+            this.iconName = res.entityData.iconName;
             this.titleModule.setTitle(`${this.gridName} - Tweezers UI`);
+            window.res = res;
             this.headers = {};
             if (res) {
                 res.propertyData.forEach(pd => {
@@ -65,6 +73,9 @@ export class GridComponent extends BaseComponent{
                 this.valid = false;
             }
             console.log("headers", this.headers);
+            this.fields = Object.keys(this.headers);
+            console.log("fields", this.fields);
+            this.displayedColumns = this.fields.filter(f => f !== this.idFieldName);
         });
 
         const entitiesPromise = this.tweezApi.getEntities(refLink).then((res) => {

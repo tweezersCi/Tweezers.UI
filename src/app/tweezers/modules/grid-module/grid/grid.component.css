@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+}
+
+tr.element-row {
+    transition: background 150ms ease-out;
+}
+
+.mat-header-cell {
+    font-size: 13px;
+    font-weight: bold;
+}
