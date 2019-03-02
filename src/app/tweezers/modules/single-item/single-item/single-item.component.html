@@ -1,11 +1,18 @@
 <div *ngIf="item && !loading">
-  <div *ngFor="let field of fields">
-    <form class="tweezers-single-item-form">
-      <tweezers-text-box
+  <form class="tweezers-single-item-form">
+    <div *ngFor="let field of fields">
+      <tweezers-text-box *ngIf="!entityData[field].values"
         [prop]="field"
-        [header]="headers[field]"
+        [header]="entityData[field].displayName"
         [item]="item"
       ></tweezers-text-box>
-    </form>
-  </div>
+
+      <tweezers-dropdown *ngIf="entityData[field].values"
+        [prop]="field"
+        [fieldData]="entityData[field]"
+        [item]="item"
+        [allowNone]="entityData[field].type !== 'Enum'"
+      ></tweezers-dropdown>
+    </div>
+  </form>
 </div>

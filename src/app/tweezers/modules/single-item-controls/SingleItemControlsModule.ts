@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { TextBoxComponent } from './text-box/TextBoxComponent';
+import { DropdownComponent } from './dropdown/DropdownComponent';
 
 @NgModule({
     imports: [
@@ -15,7 +16,7 @@ import { TextBoxComponent } from './text-box/TextBoxComponent';
         ReactiveFormsModule,
         BrowserModule,
     ],
-    declarations: [TextBoxComponent],
-    exports: [TextBoxComponent]
+    declarations: [TextBoxComponent, DropdownComponent],
+    exports: [TextBoxComponent, DropdownComponent]
 })
 export class SingleItemControlsModule {}

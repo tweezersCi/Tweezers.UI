@@ -17,7 +17,7 @@ export class SingleItemComponent extends BaseComponent {
     loading: boolean;
     item: any;
     routerEventsSubscription: Subscription;
-    headers: any;
+    entityData: any;
     fields: string[];
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
@@ -51,22 +51,27 @@ export class SingleItemComponent extends BaseComponent {
                 this.item = res;
                 window.item = this.item;
                 this.titleModule.setTitle(`${this.item.name} - Tweezers UI`);
-                console.log("current item", this.item);
             }
         });
 
         const metadataPromise = this.tweezCache.getEntityMetadata(url).then(res => {
-            this.headers = {};
+            this.entityData = {};
+            window.eData = res;
             if (res) {
                 res.propertyData.forEach(pd => {
                     const name = pd.propertyName;
                     const displayName = pd.displayName;
-                    this.headers[name] = displayName;
+                    const type = pd.propertyType;
+                    const values = pd.values;
+
+                    this.entityData[name] = {
+                        displayName,
+                        type,
+                        values
+                    };
                 });
             }
-            this.fields = Object.keys(this.headers);
-            console.log("headers", this.headers);
-            console.log("fields", this.fields);
+            this.fields = Object.keys(this.entityData);
         });
 
         Promise.all([entityPromise, metadataPromise]).then((res) => {
