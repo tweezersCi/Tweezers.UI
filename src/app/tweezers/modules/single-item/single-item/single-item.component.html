@@ -1,11 +1,17 @@
 <div *ngIf="item && !loading">
   <form class="tweezers-single-item-form">
     <div *ngFor="let field of fields">
-      <tweezers-text-box *ngIf="!entityData[field].values"
+      <tweezers-text-box *ngIf="!entityData[field].values && entityData[field].type !== 'Boolean'"
         [prop]="field"
         [header]="entityData[field].displayName"
         [item]="item"
       ></tweezers-text-box>
+
+      <tweezers-slider *ngIf="entityData[field].type === 'Boolean'"
+        [prop]="field"
+        [header]="entityData[field].displayName"
+        [item]="item"
+      ></tweezers-slider>
 
       <tweezers-dropdown *ngIf="entityData[field].values"
         [prop]="field"

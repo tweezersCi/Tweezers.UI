@@ -17,6 +17,7 @@ export class TextBoxComponent extends BaseComponent{
     }
 
     onChange(e) {
-        this.item[this.prop] = e.target.value
+        const newValue = e.target.value;
+        this.item[this.prop] = newValue;
     }
 }
