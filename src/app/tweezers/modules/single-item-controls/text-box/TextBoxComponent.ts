@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { BaseComponent } from '../../base-component/BaseComponent';
 
 @Component({
@@ -17,9 +17,6 @@ export class TextBoxComponent extends BaseComponent{
     }
 
     onChange(e) {
-        console.log("e", e);
-        console.log("currentValue", e.target.value);
-
         this.item[this.prop] = e.target.value
     }
 }
