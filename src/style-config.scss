@@ -1,0 +1,48 @@
+@import '~@angular/material/theming';
+
+/*
+
+This file is responsible of the colors in the application. We use two palettes for primary and secondary colors.
+Each palette can be selected from the Angular Material default palettes and can be created using the following template:
+
+$unicorn-palette: (
+    50 : #cfe2f3,
+    100 : #8e7cc3,
+    200 : #a64d79,
+    300 : #b84d4d,
+    400 : #e69138,
+    500 : #ffd966,
+    600 : #b6d7a8,
+    700 : #76a5af,
+    800 : #3d85c6,
+    900 : #20124d,
+    A100 : #ff9a9a,
+    A200 : #f9cb9c,
+    A400 : #ffd966,
+    A700 : #6aa84f,
+    contrast: (
+        50 : #000000,
+        100 : #ffffff,
+        200 : #ffffff,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #ffffff,
+    )
+);
+
+or by using this site http://mcg.mbitson.com/ and copying the angularjs2 (material2) code snippet
+
+*/
+
+$primaryPalette: $mat-indigo;
+$secondaryPalette: $mat-pink;
+
+@import './src/assets/colors/colors.scss';
