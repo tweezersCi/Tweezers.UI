@@ -5,6 +5,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { TweezersCache } from 'src/app/tweezers/utils/tweezers-cache';
 import { Title } from '@angular/platform-browser';
 import { BaseComponent } from '../../base-component/BaseComponent';
+import * as _ from 'lodash';
 
 declare let window;
 
@@ -21,6 +22,7 @@ export class GridComponent extends BaseComponent{
 
     entities: any;
     headers: any;
+    propertyData: any;
     fields: string[];
     displayedColumns: string[];
     idFieldName: string;
@@ -56,17 +58,26 @@ export class GridComponent extends BaseComponent{
             this.gridName = res.entityData.displayName;
             this.iconName = res.entityData.iconName;
             this.titleModule.setTitle(`${this.gridName} - Tweezers UI`);
-            window.res = res;
+            window.grid = this;
             this.headers = {};
+            this.propertyData = {};
+
             if (res) {
                 res.propertyData.forEach(pd => {
                     const name = pd.propertyName;
                     const displayName = pd.displayName;
-                    this.headers[name] = displayName;
-                    this.valid = true;
-                });
+                    const type = pd.propertyType;
+                    const values = pd.values;
 
-                this.idFieldName = res.propertyData.find(pd => pd.idField).propertyName;
+                    this.propertyData[name] = {
+                        displayName,
+                        type,
+                        values: _.invertBy(values)
+                    };
+
+                    this.idFieldName = res.propertyData.find(pd => pd.idField).propertyName;
+                    this.headers[name] = displayName;
+                });
                 this.valid = true;
             }
             else { 
@@ -92,5 +103,11 @@ export class GridComponent extends BaseComponent{
         const itemLink = `${this.refLink}/${item[this.idFieldName]}`;
         console.log(itemLink);
         this.router.navigate([itemLink]);
+    }
+
+    stringify(item: any, field: string) {
+        return this.propertyData[field].type === 'Enum' 
+            ? this.propertyData[field].values[item[field]] 
+            : item[field];
     }
 }
