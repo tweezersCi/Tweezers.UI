@@ -6,6 +6,7 @@ import { TweezersCache } from 'src/app/tweezers/utils/tweezers-cache';
 import { Title } from '@angular/platform-browser';
 import { BaseComponent } from '../../base-component/BaseComponent';
 import * as _ from 'lodash';
+import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
 
 declare let window;
 
@@ -16,7 +17,14 @@ declare let window;
 })
 export class GridComponent extends BaseComponent{
     routerEventsSubscription: Subscription;
-
+    buttons: TweezersButton[] = [
+        {
+            label: "Add",
+            icon: "add",
+            clickFunction: () => { /* TODO */ }
+        }
+    ];
+    
     valid: boolean;
     loading: boolean = false;
 

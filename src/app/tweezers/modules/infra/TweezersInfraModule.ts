@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { TweezersIconComponent } from './tweezers-icon/TweezersIconComponent';
+import { HeaderComponent } from './header/HeaderComponent';
+import { RoundButtonComponent } from './round-button/RoundButtonComponent';
 
 @NgModule({
     imports: [
@@ -15,7 +17,7 @@ import { TweezersIconComponent } from './tweezers-icon/TweezersIconComponent';
         ReactiveFormsModule,
         BrowserModule,
     ],
-    declarations: [TweezersIconComponent],
-    exports: [TweezersIconComponent]
+    declarations: [TweezersIconComponent, HeaderComponent, RoundButtonComponent],
+    exports: [TweezersIconComponent, HeaderComponent, RoundButtonComponent]
 })
 export class TweezersInfraModule {}
