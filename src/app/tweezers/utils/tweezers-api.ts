@@ -1,5 +1,5 @@
 import { ClassBaseMetadata } from '../interfaces/class-base-metadata';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../../../tweezers-conf.json'
 import { ClassMetadata } from '../interfaces/class-metadata';
@@ -39,18 +39,43 @@ export class TweezersApi {
         return this.get(url);
     }
 
-    private async get(url): Promise<any> {
+    public async saveEntity(itemUrl: string, item: any): Promise<any> {
+        const url = this.Sanitize(`${this.baseUrl}/api/${itemUrl}`);
+        return this.patch(url, item);
+    }
+
+    private async get(url: string): Promise<any> {
         return this.http.get(url).toPromise().then((res: any) => {
             if (res) {
                 return res;
             }
         }).catch((err) => {
             // That's a bad error handling, but will do for now.
+            console.log(err);
+            return null;
+        });
+    }
+
+    public async patch(url: string, body: any) {
+        return this.http.patch(url, body, {headers: this.getHeaders()}).toPromise().then((res) => {
+            if (res) {
+                return res;
+            }
+        }).catch((err) => {
+            // That's a bad error handling, but will do for now.
+            console.log(err);
             return null;
         });
     }
 
     private Sanitize(url: string): string {
         return url.replace(/(https?:\/\/)|(\/){2,}/g, "$1$2")
+    }
+
+    private getHeaders() {
+        const headers = new HttpHeaders();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json');
+        return headers;
     }
 }

@@ -8,7 +8,7 @@ import { BaseComponent } from '../../base-component/BaseComponent';
 })
 export class TweezersIconComponent extends BaseComponent {
     @Input() name: string;
-    isSvg:boolean = false;
+    isSvg: boolean = false;
      
     ngAfterContentInit(): void {
         //Called after ngOnInit when the component's or directive's content has been initialized.

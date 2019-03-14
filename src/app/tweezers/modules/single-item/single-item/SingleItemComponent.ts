@@ -6,6 +6,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { BaseComponent } from '../../base-component/BaseComponent';
 import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
+import * as _ from 'lodash';
 
 declare let window;
 
@@ -17,6 +18,7 @@ declare let window;
 export class SingleItemComponent extends BaseComponent {
     loading: boolean;
     item: any;
+    itemUrl: string;
     routerEventsSubscription: Subscription;
     propertyData: any;
     entityData: any;
@@ -25,7 +27,7 @@ export class SingleItemComponent extends BaseComponent {
         {
             label: "Save",
             icon: "save",
-            clickFunction: () => { /* TODO */ }
+            clickFunction: this.save.bind(this)
         }
     ];
 
@@ -41,7 +43,6 @@ export class SingleItemComponent extends BaseComponent {
         window.component = this;
     }
 
-
     ngOnInit(): void {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
@@ -55,6 +56,7 @@ export class SingleItemComponent extends BaseComponent {
     }
 
     loadData(url: string): any {
+        this.itemUrl = url;
         const entityPromise = this.tweezApi.getEntity(url).then((res) => {
             if (res) {
                 this.item = res;
@@ -78,7 +80,7 @@ export class SingleItemComponent extends BaseComponent {
                     const values = pd.values;
                     
                     if (pd.idField)
-                        this.entityData['idField'] = name;
+                        this.entityData.idField = name;
 
                     this.propertyData[name] = {
                         displayName,
@@ -99,5 +101,15 @@ export class SingleItemComponent extends BaseComponent {
 
     navigateToFather() {
         this.router.navigate([this.entityData.refLink]);
+    }
+
+    save() {
+        const saveItem = _.clone(this.item);
+        //delete saveItem[this.entityData['idField']];
+
+        console.log("item to save", saveItem);
+        console.log(this.itemUrl);
+        
+        this.tweezApi.saveEntity(this.itemUrl, saveItem);
     }
 }
