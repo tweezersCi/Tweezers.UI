@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <tweezers-icon [name]="headerIcon" class="mr10 mt10"></tweezers-icon>
+  {{ title }}
+  <div class="buttons-container">
+    <ng-container *ngFor="let button of buttons">
+        <tweezers-round-button [buttonDetails]="button"></tweezers-round-button>
+        <div class="divider flr"></div>
+    </ng-container>
+  </div>
+</mat-toolbar>

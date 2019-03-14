@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <tweezers-icon [name]="entityData.iconName" class="pointer mr10 mt10"></tweezers-icon>
+  <span class="pointer" (click)="navigateToFather()">{{ entityData.displayName }}</span>
+
+  <tweezers-icon [name]="'keyboard_arrow_right'" class="ml10 mr10 mt10"></tweezers-icon>
+  {{ itemName }}
+
+  <div class="buttons-container">
+    <ng-container *ngFor="let button of buttons">
+      <tweezers-round-button [buttonDetails]="button"></tweezers-round-button>
+      <div class="divider flr"></div>
+    </ng-container>
+  </div>
+</mat-toolbar>

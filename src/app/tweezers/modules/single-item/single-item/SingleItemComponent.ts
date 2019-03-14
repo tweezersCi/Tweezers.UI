@@ -5,6 +5,7 @@ import { TweezersCache } from 'src/app/tweezers/utils/tweezers-cache';
 import { Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { BaseComponent } from '../../base-component/BaseComponent';
+import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
 
 declare let window;
 
@@ -20,6 +21,13 @@ export class SingleItemComponent extends BaseComponent {
     propertyData: any;
     entityData: any;
     fields: string[];
+    buttons: TweezersButton[] = [
+        {
+            label: "Save",
+            icon: "save",
+            clickFunction: () => { /* TODO */ }
+        }
+    ];
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
         protected titleModule: Title) {
