@@ -18,6 +18,7 @@ declare let window;
 export class SingleItemComponent extends BaseComponent {
     loading: boolean;
     item: any;
+    itemBackup: any;
     itemUrl: string;
     routerEventsSubscription: Subscription;
     propertyData: any;
@@ -30,6 +31,10 @@ export class SingleItemComponent extends BaseComponent {
             label: "Save",
             icon: "save",
             clickFunction: this.save.bind(this)
+        }, {
+            label: "Discard",
+            icon: "settings_backup_restore",
+            clickFunction: this.discard.bind(this)
         }
     ];
 
@@ -120,6 +125,7 @@ export class SingleItemComponent extends BaseComponent {
                 });
             }
 
+            this.itemBackup = _.cloneDeep(this.item);
             this.loading = false;
         });
     }
@@ -129,7 +135,7 @@ export class SingleItemComponent extends BaseComponent {
     }
 
     save() {
-        const saveItem = _.clone(this.item);
+        const saveItem = _.cloneDeep(this.item);
         //delete saveItem[this.entityData['idField']];
 
         console.log("item to save", saveItem);
@@ -150,5 +156,11 @@ export class SingleItemComponent extends BaseComponent {
             console.log("deleted");
             this.router.navigate([this.entityData.refLink]);
         })
+    }
+
+    discard() {
+        this.item = _.cloneDeep(this.itemBackup);
+        window.item = this.item;
+        console.log(this.item);
     }
 }
