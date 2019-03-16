@@ -52,6 +52,11 @@ export class TweezersApi {
         return isNew ? this.post(url, item) : this.patch(url, item);
     }
 
+    public async deleteEntity(itemUrl: string): Promise<any> {
+        const url = this.Sanitize(`${this.baseUrl}/api/${itemUrl}`);
+        return this.delete(url);
+    }
+
     private async get(url: string): Promise<any> {
         return this.http.get(url).toPromise().then((res: any) => {
             if (res) {
@@ -78,6 +83,18 @@ export class TweezersApi {
 
     public async post(url: string, body: any): Promise<any> {
         return this.http.post(url, body, {headers: this.getHeaders()}).toPromise().then((res) => {
+            if (res) {
+                return res;
+            }
+        }).catch((err) => {
+            // That's a bad error handling, but will do for now.
+            console.log(err);
+            return null;
+        });
+    }
+
+    public async delete(url: string, opts?: any): Promise<any> {
+        return this.http.delete(url, {headers: this.getHeaders()}).toPromise().then((res) => {
             if (res) {
                 return res;
             }

@@ -100,11 +100,6 @@ export class SingleItemComponent extends BaseComponent {
                 });
 
                 this.fields = Object.keys(this.propertyData).filter(k => k !== this.entityData.idField);
-
-                if (this.newItem) {
-                    this.item = {};
-                    this.item.name = `New ${this.entityData.displayName}`;
-                }
             }
         });
         promises.push(metadataPromise);
@@ -112,6 +107,19 @@ export class SingleItemComponent extends BaseComponent {
         Promise.all(promises).then((res) => {
             window.item = this.item;
             window.component = this;
+
+            
+            if (this.newItem) {
+                this.item = {};
+                this.item.name = `New ${this.entityData.displayName}`;
+            } else {
+                this.buttons.push({
+                    label: "Delete",
+                    icon: "delete",
+                    clickFunction: this.delete.bind(this)
+                });
+            }
+
             this.loading = false;
         });
     }
@@ -135,5 +143,12 @@ export class SingleItemComponent extends BaseComponent {
                 this.router.navigate([this.entityData.refLink, this.item[this.entityData.idField]]);
             }
         });
+    }
+
+    delete() {
+        this.tweezApi.deleteEntity(this.itemUrl).then(res => {
+            console.log("deleted");
+            this.router.navigate([this.entityData.refLink]);
+        })
     }
 }
