@@ -21,7 +21,7 @@ export class GridComponent extends BaseComponent{
         {
             label: "Add",
             icon: "add",
-            clickFunction: () => { /* TODO */ }
+            clickFunction: this.onAddItemClicked.bind(this),
         }
     ];
     
@@ -108,14 +108,16 @@ export class GridComponent extends BaseComponent{
     }
 
     clickItem(item: any) {
-        const itemLink = `${this.refLink}/${item[this.idFieldName]}`;
-        console.log(itemLink);
-        this.router.navigate([itemLink]);
+        this.router.navigate([this.refLink, item[this.idFieldName]]);
     }
 
     stringify(item: any, field: string) {
         return this.propertyData[field].type === 'Enum' 
             ? this.propertyData[field].values[item[field]] 
             : item[field];
+    }
+
+    onAddItemClicked() {
+        this.router.navigate([this.refLink, 'newItem'], {queryParams: {newItem: true}})
     }
 }

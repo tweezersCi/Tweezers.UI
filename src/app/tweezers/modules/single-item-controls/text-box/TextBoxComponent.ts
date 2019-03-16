@@ -10,10 +10,10 @@ export class TextBoxComponent extends BaseComponent{
     @Input() prop: string;
     @Input() header: string;
     @Input() item: any;
-    private value:string;
+    private value: string;
 
     ngOnInit(): void {
-        this.value = this.item[this.prop];
+        this.value = this.item[this.prop] || "";
     }
 
     onChange(e) {

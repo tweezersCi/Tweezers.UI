@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TweezersApi } from 'src/app/tweezers/utils/tweezers-api';
 import { TweezersCache } from 'src/app/tweezers/utils/tweezers-cache';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { BaseComponent } from '../../base-component/BaseComponent';
 import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
@@ -23,6 +23,8 @@ export class SingleItemComponent extends BaseComponent {
     propertyData: any;
     entityData: any;
     fields: string[];
+    newItem: boolean;
+
     buttons: TweezersButton[] = [
         {
             label: "Save",
@@ -32,13 +34,17 @@ export class SingleItemComponent extends BaseComponent {
     ];
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
-        protected titleModule: Title) {
+        protected titleModule: Title, private route: ActivatedRoute) {
         super(tweezCache, tweezApi, router, titleModule);
-        this.routerEventsSubscription = this.router.events.subscribe(ev => {
-            if (ev instanceof NavigationEnd) {
-                this.loading = true;
-                this.loadData(ev.url);
-            }
+        this.route.queryParamMap.subscribe(params => {
+            this.newItem = params.get('newItem') === 'true';
+            // Sync problems will be solved if calling the event subscription from the params one.
+            this.routerEventsSubscription = this.router.events.subscribe(ev => {
+                if (ev instanceof NavigationEnd) {
+                    this.loading = true;
+                    this.loadData(ev.url);
+                }
+            });
         });
         window.component = this;
     }
@@ -57,22 +63,26 @@ export class SingleItemComponent extends BaseComponent {
 
     loadData(url: string): any {
         this.itemUrl = url;
-        const entityPromise = this.tweezApi.getEntity(url).then((res) => {
-            if (res) {
-                this.item = res;
-                this.titleModule.setTitle(`${this.item.name} - Tweezers UI`);
-            }
-        });
+        const promises = [];
+        if (!this.newItem) {
+            const entityPromise = this.tweezApi.getEntity(url).then((res) => {
+                if (res) {
+                    this.item = res;
+                    this.titleModule.setTitle(`${this.item.name} - Tweezers UI`);
+                }
+            });
+            promises.push(entityPromise);
+        }
 
         const metadataPromise = this.tweezCache.getEntityMetadata(url).then(res => {
-            this.propertyData = {};
-            this.entityData = {
-                displayName: res.entityData.displayName,
-                iconName: res.entityData.iconName,
-                refLink: `/${this.tweezCache.getBaseLinkKey(this.router.url)}`
-            };
-            
             if (res) {
+                this.propertyData = {};
+                this.entityData = {
+                    displayName: res.entityData.displayName,
+                    iconName: res.entityData.iconName,
+                    refLink: `/${this.tweezApi.getBaseLinkKey(this.router.url)}`
+                };
+                
                 res.propertyData.forEach(pd => {
                     const name = pd.propertyName;
                     const displayName = pd.displayName;
@@ -88,11 +98,18 @@ export class SingleItemComponent extends BaseComponent {
                         values
                     };
                 });
-            }
-            this.fields = Object.keys(this.propertyData).filter(k => k !== this.entityData.idField);
-        });
 
-        Promise.all([entityPromise, metadataPromise]).then((res) => {
+                this.fields = Object.keys(this.propertyData).filter(k => k !== this.entityData.idField);
+
+                if (this.newItem) {
+                    this.item = {};
+                    this.item.name = `New ${this.entityData.displayName}`;
+                }
+            }
+        });
+        promises.push(metadataPromise);
+
+        Promise.all(promises).then((res) => {
             window.item = this.item;
             window.component = this;
             this.loading = false;
@@ -110,6 +127,13 @@ export class SingleItemComponent extends BaseComponent {
         console.log("item to save", saveItem);
         console.log(this.itemUrl);
         
-        this.tweezApi.saveEntity(this.itemUrl, saveItem);
+        this.tweezApi.saveEntity(this.itemUrl, saveItem, this.newItem).then(res => {
+            console.log("saved", res);
+            this.item = res;
+
+            if (this.newItem) {
+                this.router.navigate([this.entityData.refLink, this.item[this.entityData.idField]]);
+            }
+        });
     }
 }

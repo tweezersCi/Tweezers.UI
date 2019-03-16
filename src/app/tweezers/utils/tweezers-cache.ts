@@ -28,7 +28,7 @@ export class TweezersCache {
     }
 
     async getEntityMetadata(refLink: string): Promise<ClassMetadata> {
-        const refLinkKey = this.getBaseLinkKey(refLink);
+        const refLinkKey = this.api.getBaseLinkKey(refLink);
         if (!this.entityMetadataCache || !this.entityMetadataCache[refLinkKey]) {
             const refLinkBaseUrl = `/${refLinkKey}`;
             console.log("base", refLinkBaseUrl);
@@ -36,11 +36,5 @@ export class TweezersCache {
         }
 
         return Promise.resolve(this.entityMetadataCache[refLinkKey]);
-    }
-
-    getBaseLinkKey(refLink: string) {
-        const parts = refLink.split('/').filter(el => el);
-        const refLinkKey = parts.find(el => true);
-        return refLinkKey;
     }
 }
