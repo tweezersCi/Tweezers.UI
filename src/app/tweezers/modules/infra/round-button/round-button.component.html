@@ -1,3 +1,7 @@
-<button mat-mini-fab class="ml10 flr" (click)="onButtonClick()">
+<button 
+    mat-mini-fab
+    class="ml10 flr"
+    (click)="onButtonClick()"
+    matTooltip="{{buttonDetails.label}}">
     <tweezers-icon name="{{buttonDetails.icon}}"></tweezers-icon>
 </button>
