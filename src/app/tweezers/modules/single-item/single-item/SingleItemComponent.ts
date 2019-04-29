@@ -108,6 +108,7 @@ export class SingleItemComponent extends BaseComponent {
                 });
 
                 this.entityData.idField = "_id";
+                this.entityData.uiTitle = this.fields.find(f => res.fields[f].fieldProperties.uiTitle);
                 console.log("data", this.propertyData);
             }
         });
@@ -120,7 +121,7 @@ export class SingleItemComponent extends BaseComponent {
             
             if (this.newItem) {
                 this.item = {};
-                this.item.name = `New ${this.entityData.singleName}`;
+                this.item[this.entityData.uiTitle] = `New ${this.entityData.singleName}`;
             } else {
                 this.buttons.push({
                     label: "Delete",
@@ -132,10 +133,6 @@ export class SingleItemComponent extends BaseComponent {
             this.itemBackup = _.cloneDeep(this.item);
             this.loading = false;
         });
-    }
-
-    navigateToFather() {
-        this.router.navigate([this.entityData.refLink]);
     }
 
     save() {
