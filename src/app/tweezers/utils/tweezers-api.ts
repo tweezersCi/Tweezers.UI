@@ -23,7 +23,7 @@ export class TweezersApi {
     }
 
     public async discoverBaseEntities(): Promise<any> {
-        const discoverUrl = `${this.baseUrl}/api/tweezers-schema`;
+        const discoverUrl = `${this.baseUrl}/api/tweezers-schema?internalObj=true`;
         return this.get(discoverUrl).then((res) => {
             return res.items.map(obj => {
                 obj.referenceLink = `/${obj.collectionName}`;
@@ -33,7 +33,7 @@ export class TweezersApi {
     }
 
     public async getEntityMetadata(refLink: string): Promise<any> {
-        const url = this.Sanitize(`${this.baseUrl}/api/tweezers-schema/${refLink}`);
+        const url = this.Sanitize(`${this.baseUrl}/api/tweezers-schema/${refLink}?internalObj=true`);
         return this.get(url);
     }
 

@@ -20,10 +20,12 @@ const landingLinkData: any = {
 export class SideMenuComponent extends BaseComponent {
     
     private linkData: any;
+    private internalLinkData: any;
 
     ngOnInit(): void {
         this.tweezCache.getClassMetadata().then(res => {
-            this.linkData = res;
+            this.linkData = res.filter(obj => !obj.internal);
+            this.internalLinkData = res.filter(obj => obj.internal);
             this.linkData.unshift(landingLinkData);
             window.linkData = this.linkData;
         });

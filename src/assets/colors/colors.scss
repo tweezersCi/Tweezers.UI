@@ -39,3 +39,24 @@ tr.element-row:hover {
 .mat-header-cell {
     color: mat-color($primaryPalette, 900);
 }
+
+.expansion-panel {
+    background: mat-color($primaryPalette, 600) !important;
+    box-shadow: none !important;
+}
+
+.expansion-panel-title {
+    color: mat-color($primaryPalette, 50) !important;
+}
+
+.expansion-panel-header {
+    padding: 0px 20px 0px 10px !important;
+}
+
+.mat-expansion-indicator::after {
+    color: mat-color($primaryPalette, 50) !important;
+}
+
+.mat-expansion-panel-body {
+    padding: 0px 0px 0px 0px !important;
+}
