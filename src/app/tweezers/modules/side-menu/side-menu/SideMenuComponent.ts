@@ -1,15 +1,15 @@
 import { Component } from "@angular/core";
-import { ClassBaseMetadata } from 'src/app/tweezers/interfaces/class-base-metadata';
 import { BaseComponent } from '../../base-component/BaseComponent';
 
 declare let window;
 
-const landingLinkData: ClassBaseMetadata = {
-    name: "menu",
-    displayName: "Menu",
-    description: "",
+const landingLinkData: any = {
+    collectionName: "menu",
+    displayNames: {
+        pluralName: "Menu",
+    },
     referenceLink: "",
-    iconName: "home"
+    icon: "home"
 }
 
 @Component({
@@ -19,7 +19,7 @@ const landingLinkData: ClassBaseMetadata = {
 })
 export class SideMenuComponent extends BaseComponent {
     
-    private linkData: ClassBaseMetadata[];
+    private linkData: any;
 
     ngOnInit(): void {
         this.tweezCache.getClassMetadata().then(res => {

@@ -1,4 +1,3 @@
-import { ClassBaseMetadata } from '../interfaces/class-base-metadata';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../../../tweezers-conf.json'
@@ -23,15 +22,18 @@ export class TweezersApi {
         return refLinkKey;
     }
 
-    public async discoverBaseEntities(): Promise<ClassBaseMetadata[]> {
-        const discoverUrl = `${this.baseUrl}/api/tweezers`;
+    public async discoverBaseEntities(): Promise<any> {
+        const discoverUrl = `${this.baseUrl}/api/tweezers-schema`;
         return this.get(discoverUrl).then((res) => {
-            return res.map(sr => sr as ClassBaseMetadata);
+            return res.items.map(obj => {
+                obj.referenceLink = `/${obj.collectionName}`;
+                return obj;
+            });
         });
     }
 
-    public async getEntityMetadata(refLink: string): Promise<ClassMetadata> {
-        const url = this.Sanitize(`${this.baseUrl}/api/tweezers/${refLink}`);
+    public async getEntityMetadata(refLink: string): Promise<any> {
+        const url = this.Sanitize(`${this.baseUrl}/api/tweezers-schema/${refLink}`);
         return this.get(url);
     }
 

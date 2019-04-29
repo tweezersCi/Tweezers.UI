@@ -63,19 +63,23 @@ export class GridComponent extends BaseComponent{
     loadGridData(refLink: string): any {
         this.refLink = refLink;
         const entityMetadataPromise = this.tweezCache.getEntityMetadata(refLink).then((res) => {
-            this.gridName = res.entityData.displayName;
-            this.iconName = res.entityData.iconName;
-            this.titleModule.setTitle(`${this.gridName} - Tweezers UI`);
+            console.log(res);
             window.grid = this;
             this.headers = {};
             this.propertyData = {};
 
             if (res) {
-                res.propertyData.forEach(pd => {
-                    const name = pd.propertyName;
-                    const displayName = pd.displayName;
-                    const type = pd.propertyType;
-                    const values = pd.values;
+                this.gridName = res.displayNames.pluralName;
+                this.iconName = res.icon;
+                this.titleModule.setTitle(`${this.gridName} - Tweezers UI`);
+                const keys = Object.keys(res.fields);
+                keys.forEach(key => {
+                    const field = res.fields[key];
+                    console.log("field", field);
+                    const name = field.name;
+                    const displayName = field.displayName;
+                    const type = field.fieldProperties.fieldType;
+                    const values = field.fieldProperties.possibleValues;
 
                     this.propertyData[name] = {
                         displayName,
@@ -83,7 +87,7 @@ export class GridComponent extends BaseComponent{
                         values: _.invertBy(values)
                     };
 
-                    this.idFieldName = res.propertyData.find(pd => pd.idField).propertyName;
+                    this.idFieldName = "_id";
                     this.headers[name] = displayName;
                 });
                 this.valid = true;
@@ -98,7 +102,7 @@ export class GridComponent extends BaseComponent{
         });
 
         const entitiesPromise = this.tweezApi.getEntities(refLink).then((res) => {
-            this.entities = res;
+            this.entities = res.items;
             console.log("items", this.entities);
         });
 
