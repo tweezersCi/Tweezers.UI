@@ -4,9 +4,7 @@
   <form class="tweezers-single-item-form">
     <div *ngFor="let field of fields">
       <tweezers-text-box
-        *ngIf="
-          !propertyData[field].values && propertyData[field].type !== 'Boolean'
-        "
+        *ngIf="propertyData[field].type === 'String' || propertyData[field].type === 'Integer'"
         [prop]="field"
         [header]="propertyData[field].displayName"
         [item]="item"
@@ -20,11 +18,11 @@
       ></tweezers-slider>
 
       <tweezers-dropdown
-        *ngIf="propertyData[field].values"
+        *ngIf="propertyData[field].type === 'Enum'"
         [prop]="field"
         [fieldData]="propertyData[field]"
         [item]="item"
-        [allowNone]="propertyData[field].type !== 'Enum'"
+        [allowNone]="!propertyData[field].required"
       ></tweezers-dropdown>
     </div>
   </form>

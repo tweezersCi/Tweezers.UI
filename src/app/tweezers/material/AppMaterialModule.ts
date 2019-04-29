@@ -10,7 +10,8 @@ import {
   MatDividerModule,
   MatSlideToggleModule,
   MatTableModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatExpansionModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -29,7 +30,8 @@ import { CommonModule } from "@angular/common";
     MatListModule,
     MatSlideToggleModule,
     MatTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ],
   exports: [
     MatInputModule,
@@ -43,7 +45,8 @@ import { CommonModule } from "@angular/common";
     MatListModule,
     MatSlideToggleModule,
     MatTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ]
 })
 export class AppMaterialModule {}
