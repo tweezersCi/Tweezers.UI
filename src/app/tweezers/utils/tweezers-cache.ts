@@ -1,13 +1,12 @@
 import { Injectable } from "@angular/core";
 import { TweezersApi } from './tweezers-api';
-import { ClassBaseMetadata } from '../interfaces/class-base-metadata';
 import { ClassMetadata } from '../interfaces/class-metadata';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TweezersCache {
-    private classMetadata: ClassBaseMetadata[];
+    private classMetadata: any;
     private entityMetadataCache: any = {};
 
     constructor(private api: TweezersApi) {
@@ -19,15 +18,15 @@ export class TweezersCache {
         this.api.discoverBaseEntities().then(data => this.classMetadata = data);
     }
 
-    async getClassMetadata(): Promise<ClassBaseMetadata[]>{
+    async getClassMetadata(): Promise<any>{
         if (!this.classMetadata) {
             this.classMetadata = await this.api.discoverBaseEntities();
         }
-            
+    
         return Promise.resolve(this.classMetadata);
     }
 
-    async getEntityMetadata(refLink: string): Promise<ClassMetadata> {
+    async getEntityMetadata(refLink: string): Promise<any> {
         const refLinkKey = this.api.getBaseLinkKey(refLink);
         if (!this.entityMetadataCache || !this.entityMetadataCache[refLinkKey]) {
             const refLinkBaseUrl = `/${refLinkKey}`;
