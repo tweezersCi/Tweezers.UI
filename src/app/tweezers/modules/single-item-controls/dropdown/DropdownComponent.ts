@@ -14,7 +14,6 @@ export class DropdownComponent extends BaseComponent{
     fieldKeys: string[]
 
     ngOnInit(): void {
-        this.fieldKeys = Object.keys(this.fieldData.values);
     }
 
     onChange(e) {

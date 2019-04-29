@@ -116,9 +116,7 @@ export class GridComponent extends BaseComponent{
     }
 
     stringify(item: any, field: string) {
-        return this.propertyData[field].type === 'Enum' 
-            ? this.propertyData[field].values[item[field]] 
-            : item[field];
+        return item[field];
     }
 
     onAddItemClicked() {

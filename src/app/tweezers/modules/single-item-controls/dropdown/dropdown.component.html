@@ -5,8 +5,8 @@
     (selectionChange)="onChange($event)"
   >
     <mat-option *ngIf="allowNone" [value]="null">-None-</mat-option>
-    <mat-option *ngFor="let key of fieldKeys" [value]="fieldData.values[key]">
-      {{ key }}
+    <mat-option *ngFor="let value of fieldData.values" [value]="value">
+      {{ value }}
     </mat-option>
   </mat-select>
 </mat-form-field>
