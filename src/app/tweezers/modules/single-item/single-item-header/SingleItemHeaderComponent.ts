@@ -11,4 +11,8 @@ export class SingleItemHeaderComponent extends BaseComponent{
     @Input() entityData: any;
     @Input() itemName: string;
     @Input() buttons: TweezersButton[];
+
+    navigateToFather() {
+        this.router.navigate([this.entityData.refLink]);
+    }
 }

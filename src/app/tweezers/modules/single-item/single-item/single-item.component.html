@@ -1,5 +1,5 @@
 <div *ngIf="item && !loading">
-  <tweezers-single-item-header [entityData]="entityData" [itemName]="item['name']" [buttons]="buttons"></tweezers-single-item-header>
+  <tweezers-single-item-header [entityData]="entityData" [itemName]="item[entityData.uiTitle]" [buttons]="buttons"></tweezers-single-item-header>
 
   <form class="tweezers-single-item-form">
     <div *ngFor="let field of fields">
