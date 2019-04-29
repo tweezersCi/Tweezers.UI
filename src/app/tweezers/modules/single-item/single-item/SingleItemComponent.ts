@@ -83,20 +83,21 @@ export class SingleItemComponent extends BaseComponent {
             if (res) {
                 this.propertyData = {};
                 this.entityData = {
-                    displayName: res.entityData.displayName,
-                    iconName: res.entityData.iconName,
+                    displayName: res.displayNames.pluralName,
+                    singleName: res.displayNames.singularName,
+                    iconName: res.icon,
                     refLink: `/${this.tweezApi.getBaseLinkKey(this.router.url)}`
                 };
                 
-                res.propertyData.forEach(pd => {
-                    const name = pd.propertyName;
-                    const displayName = pd.displayName;
-                    const type = pd.propertyType;
-                    const values = pd.values;
+                this.fields = Object.keys(res.fields);
+                this.fields.forEach(key => {
+                    const field = res.fields[key];
+                    console.log(field);
+                    const name = field.name;
+                    const displayName = field.displayName;
+                    const type = field.fieldProperties.fieldType;
+                    const values = field.fieldProperties.possibleValues;
                     
-                    if (pd.idField)
-                        this.entityData.idField = name;
-
                     this.propertyData[name] = {
                         displayName,
                         type,
@@ -104,7 +105,8 @@ export class SingleItemComponent extends BaseComponent {
                     };
                 });
 
-                this.fields = Object.keys(this.propertyData).filter(k => k !== this.entityData.idField);
+                this.entityData.idField = "_id";
+                console.log("data", this.propertyData);
             }
         });
         promises.push(metadataPromise);
@@ -116,7 +118,7 @@ export class SingleItemComponent extends BaseComponent {
             
             if (this.newItem) {
                 this.item = {};
-                this.item.name = `New ${this.entityData.displayName}`;
+                this.item.name = `New ${this.entityData.singleName}`;
             } else {
                 this.buttons.push({
                     label: "Delete",
