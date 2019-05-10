@@ -39,13 +39,13 @@ export class SingleItemComponent extends BaseComponent {
     ];
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
-        protected titleModule: Title, private route: ActivatedRoute) {
+        protected titleModule: Title, protected route: ActivatedRoute) {
         super(tweezCache, tweezApi, router, titleModule);
         this.route.queryParamMap.subscribe(params => {
             this.newItem = params.get('newItem') === 'true';
             // Sync problems will be solved if calling the event subscription from the params one.
             this.routerEventsSubscription = this.router.events.subscribe(ev => {
-                if (ev instanceof NavigationEnd) {
+                if (ev instanceof NavigationEnd && !this.loading) {
                     this.loading = true;
                     this.loadData(ev.url);
                 }
@@ -109,6 +109,7 @@ export class SingleItemComponent extends BaseComponent {
 
                 this.entityData.idField = "_id";
                 this.entityData.uiTitle = this.fields.find(f => res.fields[f].fieldProperties.uiTitle);
+                this.afterMetadataInit();
                 console.log("data", this.propertyData);
             }
         });
@@ -118,11 +119,11 @@ export class SingleItemComponent extends BaseComponent {
             window.item = this.item;
             window.component = this;
 
-            
             if (this.newItem) {
                 this.item = {};
                 this.item[this.entityData.uiTitle] = `New ${this.entityData.singleName}`;
             } else {
+                console.log("hello");
                 this.buttons.push({
                     label: "Delete",
                     icon: "delete",
@@ -163,5 +164,9 @@ export class SingleItemComponent extends BaseComponent {
         this.item = _.cloneDeep(this.itemBackup);
         window.item = this.item;
         console.log(this.item);
+    }
+
+    protected afterMetadataInit() {
+        
     }
 }

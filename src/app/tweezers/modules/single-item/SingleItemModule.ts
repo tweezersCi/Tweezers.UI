@@ -15,7 +15,13 @@ import { SingleItemHeaderComponent } from './single-item-header/SingleItemHeader
         TweezersInfraModule,
         AppMaterialModule
     ],
-    declarations: [SingleItemComponent, SingleItemHeaderComponent],
-    exports: [SingleItemComponent, SingleItemHeaderComponent],
+    declarations: [
+        SingleItemComponent,
+        SingleItemHeaderComponent,
+    ],
+    exports: [
+        SingleItemComponent,
+        SingleItemHeaderComponent,
+    ],
 })
 export class SingleItemModule { }

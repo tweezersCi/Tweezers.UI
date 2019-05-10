@@ -73,9 +73,13 @@ export class GridComponent extends BaseComponent{
                 this.iconName = res.icon;
                 this.titleModule.setTitle(`${this.gridName} - Tweezers UI`);
                 const keys = Object.keys(res.fields);
-                keys.forEach(key => {
+                console.log(keys);
+                for (let i = 0; i < keys.length; i++) {
+                    const key = keys[i];
                     const field = res.fields[key];
-                    console.log("field", field);
+                    if (field.fieldProperties.gridIgnore)
+                        continue;
+                    
                     const name = field.name;
                     const displayName = field.displayName;
                     const type = field.fieldProperties.fieldType;
@@ -89,7 +93,8 @@ export class GridComponent extends BaseComponent{
 
                     this.idFieldName = "_id";
                     this.headers[name] = displayName;
-                });
+                };
+                
                 this.valid = true;
             }
             else { 
@@ -120,6 +125,6 @@ export class GridComponent extends BaseComponent{
     }
 
     onAddItemClicked() {
-        this.router.navigate([this.refLink, 'newItem'], {queryParams: {newItem: true}})
+        this.router.navigate([this.refLink, 'newItem'], {queryParams: {newItem: true}});
     }
 }
