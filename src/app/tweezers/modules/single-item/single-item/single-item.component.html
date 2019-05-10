@@ -4,10 +4,11 @@
   <form class="tweezers-single-item-form">
     <div *ngFor="let field of fields">
       <tweezers-text-box
-        *ngIf="propertyData[field].type === 'String' || propertyData[field].type === 'Integer'"
+        *ngIf="propertyData[field].type === 'String' || propertyData[field].type === 'Integer' || propertyData[field].type === 'Password'"
         [prop]="field"
         [header]="propertyData[field].displayName"
         [item]="item"
+        [inputType]="propertyData[field].type"
       ></tweezers-text-box>
 
       <tweezers-slider

@@ -10,6 +10,7 @@ export class TextBoxComponent extends BaseComponent{
     @Input() prop: string;
     @Input() header: string;
     @Input() item: any;
+    @Input() inputType: string;
 
     ngOnInit(): void {
     }
@@ -17,5 +18,14 @@ export class TextBoxComponent extends BaseComponent{
     onChange(e) {
         const newValue = e.target.value;
         this.item[this.prop] = newValue;
+    }
+
+    determineInputType() {
+        switch (this.inputType) {
+            case "String": return "text";
+            case "Integer": return "number";
+            case "Password": return "password";
+            default: return "text";
+        }
     }
 }
