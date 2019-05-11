@@ -1,7 +1,7 @@
 <ng-container>
     <mat-toolbar #header class="layout-header">
         <mat-icon class="pointer mr10" (click)="sidenav.toggle()">{{ sidenav.opened ? 'chevron_left' : 'menu' }}</mat-icon>
-        Tweezers UI
+        {{ title }}
     </mat-toolbar>
 
     <mat-sidenav-container class="layout-container">

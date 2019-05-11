@@ -11,7 +11,8 @@ import {
   MatSlideToggleModule,
   MatTableModule,
   MatTooltipModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatCardModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -31,7 +32,8 @@ import { CommonModule } from "@angular/common";
     MatSlideToggleModule,
     MatTableModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule
   ],
   exports: [
     MatInputModule,
@@ -46,7 +48,8 @@ import { CommonModule } from "@angular/common";
     MatSlideToggleModule,
     MatTableModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule
   ]
 })
 export class AppMaterialModule {}

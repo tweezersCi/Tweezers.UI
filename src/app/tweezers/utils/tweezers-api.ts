@@ -32,6 +32,11 @@ export class TweezersApi {
         });
     }
 
+    public async getGeneralMetadata(): Promise<any> {
+        const url = this.Sanitize(`${this.baseUrl}/api/metadata`);
+        return this.get(url);
+    }
+
     public async getEntityMetadata(refLink: string): Promise<any> {
         const url = this.Sanitize(`${this.baseUrl}/api/tweezers-schema/${refLink}?internalObj=true`);
         return this.get(url);
@@ -57,6 +62,16 @@ export class TweezersApi {
     public async deleteEntity(itemUrl: string): Promise<any> {
         const url = this.Sanitize(`${this.baseUrl}/api/${itemUrl}`);
         return this.delete(url);
+    }
+
+    public async login(username: string, password: string) {
+        const loginRequest = {
+            username,
+            password
+        };
+
+        const url = this.Sanitize(`${this.baseUrl}/api/login`);
+        return this.post(url, loginRequest);
     }
 
     private async get(url: string): Promise<any> {
