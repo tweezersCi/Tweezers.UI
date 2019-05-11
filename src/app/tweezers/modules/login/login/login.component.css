@@ -1,0 +1,16 @@
+.login-card {
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header-image {
+  background-image: url('https://www.peggysage.com/media/catalog/product/cache/2/image/6e1d3dc04e87318dc1b5baa10442f550/3/0/300042.png');
+  background-size: cover;
+}
+
+.login-field {
+  width: 100%;
+}

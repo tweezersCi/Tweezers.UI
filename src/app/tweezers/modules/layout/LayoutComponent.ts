@@ -10,15 +10,17 @@ declare let window;
     styleUrls  : [ 'layout.css' ]
 })
 export class LayoutComponent extends BaseComponent {
+    title: string;
+    
     ngOnInit(): void {
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
-        this.titleModule.setTitle("Tweezers");
         window.layout = this;
+
+        this.tweezCache.getGeneralMetadata().then(res => {
+            this.title = res.title;
+            this.titleModule.setTitle(`${this.title} - Tweezers`);
+        });
     }
 
     ngAfterViewInit(): void {
-        //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-        //Add 'implements AfterViewInit' to the class.
     }
 }

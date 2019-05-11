@@ -63,7 +63,6 @@ export class SingleItemComponent extends BaseComponent {
     ngOnDestroy(): void {
         //Called once, before the instance is destroyed.
         //Add 'implements OnDestroy' to the class.
-        this.routerEventsSubscription.unsubscribe();
     }
 
     loadData(url: string): any {
@@ -133,6 +132,7 @@ export class SingleItemComponent extends BaseComponent {
 
             this.itemBackup = _.cloneDeep(this.item);
             this.loading = false;
+            this.routerEventsSubscription.unsubscribe();
         });
     }
 

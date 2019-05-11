@@ -1,0 +1,42 @@
+<mat-card class="login-card">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-subtitle>{{ title }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="login-form" autocomplete="off">
+      <div>
+        <mat-form-field class="login-field">
+          <input
+            matInput
+            placeholder="Username"
+            [(ngModel)]="username"
+            type="text"
+            name="username"
+            required
+            autocomplete="off"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="login-field">
+          <input
+            matInput
+            placeholder="Password"
+            [(ngModel)]="password"
+            type="password"
+            name="password"
+            required
+            autocomplete="off"
+          />
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <ng-container *ngFor="let button of buttons">
+      <tweezers-round-button [buttonDetails]="button"></tweezers-round-button>
+      <div class="divider flr"></div>
+    </ng-container>
+  </mat-card-actions>
+</mat-card>

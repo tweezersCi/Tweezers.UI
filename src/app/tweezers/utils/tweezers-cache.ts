@@ -6,6 +6,7 @@ import { ClassMetadata } from '../interfaces/class-metadata';
     providedIn: 'root'
 })
 export class TweezersCache {
+    private metadata: any;
     private classMetadata: any;
     private entityMetadataCache: any = {};
 
@@ -16,6 +17,14 @@ export class TweezersCache {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
         this.api.discoverBaseEntities().then(data => this.classMetadata = data);
+    }
+
+    async getGeneralMetadata(): Promise<any>{
+        if (!this.metadata) {
+            this.metadata = await this.api.getGeneralMetadata()
+        }
+
+        return Promise.resolve(this.metadata);
     }
 
     async getClassMetadata(): Promise<any>{
