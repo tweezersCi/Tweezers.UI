@@ -9,7 +9,7 @@ import { MatListItem } from '@angular/material';
 })
 export class SideMenuItemComponent extends BaseComponent {
     @Input() link: any;
-    @ViewChild('side_menu_item') private sideMenuItem: MatListItem;
+    @ViewChild('side_menu_item', { static: true }) private sideMenuItem: MatListItem;
     
     ngAfterContentInit(): void {
         //Called after ngOnInit when the component's or directive's content has been initialized.
