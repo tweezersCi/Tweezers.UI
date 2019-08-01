@@ -27,15 +27,15 @@ export class LoginComponent extends BaseComponent {
     ];
 
     ngOnInit(): void {
-        this.tweezCache.getGeneralMetadata().then(res => {
-            this.title = res.title;
-        })
     }
 
     onLogin() {
         console.log("logging in...");
-        this.tweezApi.login(this.username, this.password).then(res => {
-            //do stuff;
+        this.authService.login(this.username, this.password).then(res => {
+            this.router.navigate(['']).then(() => {
+                window.location.href = '';
+            });
+            
         });
     }
 

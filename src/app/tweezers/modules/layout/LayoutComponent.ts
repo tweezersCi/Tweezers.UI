@@ -16,7 +16,7 @@ export class LayoutComponent extends BaseComponent {
         window.layout = this;
 
         this.tweezCache.getGeneralMetadata().then(res => {
-            this.title = res.title;
+            this.title = res.tweezersDetails.title;
             this.titleModule.setTitle(`${this.title} - Tweezers`);
         });
     }

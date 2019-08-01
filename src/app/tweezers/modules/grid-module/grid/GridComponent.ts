@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { BaseComponent } from '../../base-component/BaseComponent';
 import * as _ from 'lodash';
 import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
+import { AuthenticationService } from 'src/app/tweezers/utils/authentication-service';
 
 declare let window;
 
@@ -39,8 +40,8 @@ export class GridComponent extends BaseComponent{
     iconName: string;
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
-        protected titleModule: Title) {
-        super(tweezCache, tweezApi, router, titleModule);
+        protected titleModule: Title, protected authService: AuthenticationService) {
+        super(tweezCache, tweezApi, router, titleModule, authService);
         this.routerEventsSubscription = this.router.events.subscribe(ev => {
             if (ev instanceof NavigationEnd) {
                 this.loading = true;

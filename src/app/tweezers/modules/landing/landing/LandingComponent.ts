@@ -5,6 +5,7 @@ import { TweezersApi } from 'src/app/tweezers/utils/tweezers-api';
 import { TweezersCache } from 'src/app/tweezers/utils/tweezers-cache';
 import { Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { AuthenticationService } from 'src/app/tweezers/utils/authentication-service';
 
 @Component({
     selector: 'landing',
@@ -14,8 +15,8 @@ export class LandingComponent extends BaseComponent {
     routerEventsSubscription: Subscription;
     
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
-        protected titleModule: Title) {
-        super(tweezCache, tweezApi, router, titleModule);
+        protected titleModule: Title, protected authService: AuthenticationService) {
+        super(tweezCache, tweezApi, router, titleModule, authService);
         this.routerEventsSubscription = this.router.events.subscribe(ev => {
             if (ev instanceof NavigationEnd) {
                 this.titleModule.setTitle("Landing - Tweezers");
