@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { BaseComponent } from '../../base-component/BaseComponent';
 import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
 import * as _ from 'lodash';
+import { AuthenticationService } from 'src/app/tweezers/utils/authentication-service';
 
 declare let window;
 
@@ -39,8 +40,8 @@ export class SingleItemComponent extends BaseComponent {
     ];
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
-        protected titleModule: Title, protected route: ActivatedRoute) {
-        super(tweezCache, tweezApi, router, titleModule);
+        protected titleModule: Title, protected route: ActivatedRoute, protected authService: AuthenticationService) {
+        super(tweezCache, tweezApi, router, titleModule, authService);
         this.route.queryParamMap.subscribe(params => {
             this.newItem = params.get('newItem') === 'true';
             // Sync problems will be solved if calling the event subscription from the params one.

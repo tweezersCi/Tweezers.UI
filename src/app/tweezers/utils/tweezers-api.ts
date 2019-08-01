@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../../../tweezers-conf.json'
-import { ClassMetadata } from '../interfaces/class-metadata';
+import { Router } from '@angular/router';
 
 declare let window: any;
 
@@ -10,8 +10,8 @@ declare let window: any;
 })
 export class TweezersApi {
     public baseUrl: string;
-
-    constructor(private http: HttpClient) {
+    
+    constructor(private http: HttpClient, private router: Router) {
         window.tweezApi = this;
         this.baseUrl = config.url;
     }
@@ -75,14 +75,12 @@ export class TweezersApi {
     }
 
     private async get(url: string): Promise<any> {
-        return this.http.get(url).toPromise().then((res: any) => {
+        return this.http.get(url, {headers: this.getHeaders()}).toPromise().then((res: any) => {
             if (res) {
                 return res;
             }
         }).catch((err) => {
-            // That's a bad error handling, but will do for now.
-            console.log(err);
-            return null;
+            return this.handleErrors(err);
         });
     }
 
@@ -92,9 +90,7 @@ export class TweezersApi {
                 return res;
             }
         }).catch((err) => {
-            // That's a bad error handling, but will do for now.
-            console.log(err);
-            return null;
+            return this.handleErrors(err);
         });
     }
 
@@ -104,9 +100,7 @@ export class TweezersApi {
                 return res;
             }
         }).catch((err) => {
-            // That's a bad error handling, but will do for now.
-            console.log(err);
-            return null;
+            return this.handleErrors(err);
         });
     }
 
@@ -116,10 +110,17 @@ export class TweezersApi {
                 return res;
             }
         }).catch((err) => {
-            // That's a bad error handling, but will do for now.
-            console.log(err);
-            return null;
+            return this.handleErrors(err);
         });
+    }
+
+    private handleErrors(err: HttpErrorResponse) {
+        console.log(err);
+        if (err.status == 401) {
+            localStorage.clear();
+            this.router.navigate(['']);
+        }
+        return Promise.reject();
     }
 
     private Sanitize(url: string): string {
@@ -127,9 +128,13 @@ export class TweezersApi {
     }
 
     private getHeaders() {
-        const headers = new HttpHeaders();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-Type', 'application/json');
+        const sessionId = localStorage.getItem('sessionId') || '';
+        let headers = new HttpHeaders()
+            .append('Accept', 'application/json')
+            .append('Content-Type', 'application/json')
+            .append('sessionId', sessionId);
+
+        console.log(headers);
         return headers;
     }
 }

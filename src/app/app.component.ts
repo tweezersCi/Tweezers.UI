@@ -1,6 +1,7 @@
 import { Component, SimpleChanges, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppModule } from './app.module';
+import { AuthenticationService } from './tweezers/utils/authentication-service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,13 @@ import { AppModule } from './app.module';
 })
 export class AppComponent {
   title = 'TweezersUi';
+  isLoggedIn: boolean;
 
-  constructor(private activeRoute: ActivatedRoute) {
+  constructor(private activeRoute: ActivatedRoute, private authService: AuthenticationService) {
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
