@@ -7,6 +7,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { TextBoxComponent } from './text-box/TextBoxComponent';
 import { DropdownComponent } from './dropdown/DropdownComponent';
 import { SliderComponent } from './slider/SliderComponent';
+import { ArrayComponent } from './array/ArrayComponent';
 
 @NgModule({
     imports: [
@@ -17,7 +18,7 @@ import { SliderComponent } from './slider/SliderComponent';
         ReactiveFormsModule,
         BrowserModule,
     ],
-    declarations: [TextBoxComponent, DropdownComponent, SliderComponent],
-    exports: [TextBoxComponent, DropdownComponent, SliderComponent]
+    declarations: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent],
+    exports: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent]
 })
 export class SingleItemControlsModule {}
