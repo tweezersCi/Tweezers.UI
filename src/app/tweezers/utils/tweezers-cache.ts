@@ -27,8 +27,8 @@ export class TweezersCache {
         return Promise.resolve(this.metadata);
     }
 
-    async getClassMetadata(): Promise<any>{
-        if (!this.classMetadata) {
+    async getClassMetadata(force: boolean): Promise<any>{
+        if (!this.classMetadata || force) {
             this.classMetadata = await this.api.discoverBaseEntities();
         }
     
