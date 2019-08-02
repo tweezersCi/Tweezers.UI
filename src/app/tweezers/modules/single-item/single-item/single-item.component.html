@@ -9,6 +9,7 @@
         [header]="propertyData[field].displayName"
         [item]="item"
         [inputType]="propertyData[field].type"
+        [required]="propertyData[field].required"
       ></tweezers-text-box>
 
       <tweezers-slider
@@ -16,6 +17,7 @@
         [prop]="field"
         [header]="propertyData[field].displayName"
         [item]="item"
+        [required]="propertyData[field].required"
       ></tweezers-slider>
 
       <tweezers-dropdown

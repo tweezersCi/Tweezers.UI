@@ -1,3 +1,9 @@
 <ng-container class="slider">
-  <mat-slide-toggle class="ml10 mt10" [checked]="item[prop]" (change)="onChange($event)">{{ header }}</mat-slide-toggle>
+  <mat-slide-toggle 
+      class="ml10 mt10"
+      [checked]="item[prop]"
+      (change)="onChange($event)"
+      [required]="required">
+        {{ header }}
+      </mat-slide-toggle>
 </ng-container>

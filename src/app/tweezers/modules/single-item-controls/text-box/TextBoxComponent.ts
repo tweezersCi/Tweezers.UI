@@ -11,6 +11,7 @@ export class TextBoxComponent extends BaseComponent{
     @Input() header: string;
     @Input() item: any;
     @Input() inputType: string;
+    @Input() required: boolean = false;
 
     ngOnInit(): void {
     }

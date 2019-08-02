@@ -1,3 +1,7 @@
 <mat-form-field class="text-box ml10 mt10">
-    <input matInput [placeholder]="header" [(ngModel)]="item[prop]" (change)="onChange($event)" [type]="determineInputType()">
+    <input matInput [placeholder]="header"
+        [(ngModel)]="item[prop]"
+        (change)="onChange($event)"
+        [type]="determineInputType()"
+        [required]="required">
 </mat-form-field>
