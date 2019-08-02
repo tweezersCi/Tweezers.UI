@@ -10,6 +10,7 @@ export class SliderComponent extends BaseComponent {
     @Input() prop: string;
     @Input() header: string;
     @Input() item: any;
+    @Input() required: boolean = false;
 
     onChange(e) {
         const newValue = e.checked;

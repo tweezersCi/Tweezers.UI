@@ -3,6 +3,7 @@
     [placeholder]="fieldData.displayName"
     [value]="item[prop]"
     (selectionChange)="onChange($event)"
+    [required]="!allowNone"
   >
     <mat-option *ngIf="allowNone" [value]="null">-None-</mat-option>
     <mat-option *ngFor="let value of fieldData.values" [value]="value">
