@@ -1,5 +1,12 @@
+<mat-list class="w80 force-m10">
+  <mat-list-item>{{ displayName }}</mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let fieldMetadata of item[prop] | keyvalue">
+  <mat-expansion-panel
+    *ngFor="let fieldMetadata of item[prop] | keyvalue"
+    class="force-m10 w80"
+  >
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{ fieldMetadata.value.fieldProperties.displayName }}
@@ -25,7 +32,6 @@
         [prop]="propertyData.fieldProperties.name"
         [header]="propertyData.fieldProperties.displayName"
         [item]="fieldMetadata.value.fieldProperties"
-        [required]="propertyData.fieldProperties.required"
       ></tweezers-slider>
 
       <tweezers-dropdown
@@ -37,5 +43,20 @@
         [allowNone]="!propertyData.fieldProperties.required"
       ></tweezers-dropdown>
     </div>
+
+    <mat-action-row>
+      <button
+        mat-button
+        color="warn"
+        type="button"
+        (click)="deleteField(fieldMetadata.key)"
+      >
+        Delete
+      </button>
+    </mat-action-row>
   </mat-expansion-panel>
+
+  <div class="w80 force-m10">
+    <tweezers-round-button [buttonDetails]="addButton"></tweezers-round-button>
+  </div>
 </mat-accordion>

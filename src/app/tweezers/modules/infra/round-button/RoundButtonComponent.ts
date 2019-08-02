@@ -9,6 +9,11 @@ import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
 })
 export class RoundButtonComponent extends BaseComponent{
     @Input() buttonDetails: TweezersButton;
+    type: string;
+
+    ngOnInit(): void {
+     
+    }
 
     onButtonClick() {
         if (this.buttonDetails.clickFunction) {
