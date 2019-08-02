@@ -8,6 +8,7 @@ import { TextBoxComponent } from './text-box/TextBoxComponent';
 import { DropdownComponent } from './dropdown/DropdownComponent';
 import { SliderComponent } from './slider/SliderComponent';
 import { ArrayComponent } from './array/ArrayComponent';
+import { TweezersInfraModule } from '../infra/TweezersInfraModule';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { ArrayComponent } from './array/ArrayComponent';
         FormsModule,
         ReactiveFormsModule,
         BrowserModule,
+        TweezersInfraModule,
     ],
     declarations: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent],
     exports: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent]

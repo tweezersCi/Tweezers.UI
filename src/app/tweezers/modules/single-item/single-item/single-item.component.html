@@ -33,6 +33,7 @@
         *ngIf="propertyData[field].type === 'Array'"
         [prop]="field"
         [objectReference]="propertyData[field].internalFieldData.objectReference"
+        [displayName]="propertyData[field].displayName"
         [item]="item"
         [required]="propertyData[field].required"
       ></tweezers-array>
