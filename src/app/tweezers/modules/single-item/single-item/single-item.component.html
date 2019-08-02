@@ -23,10 +23,19 @@
       <tweezers-dropdown
         *ngIf="propertyData[field].type === 'Enum'"
         [prop]="field"
-        [fieldData]="propertyData[field]"
+        [displayName]="propertyData[field].displayName"
+        [values]="propertyData[field].values"
         [item]="item"
         [allowNone]="!propertyData[field].required"
       ></tweezers-dropdown>
+
+      <tweezers-array
+        *ngIf="propertyData[field].type === 'Array'"
+        [prop]="field"
+        [objectReference]="propertyData[field].internalFieldData.objectReference"
+        [item]="item"
+        [required]="propertyData[field].required"
+      ></tweezers-array>
     </div>
   </form>
 </div>

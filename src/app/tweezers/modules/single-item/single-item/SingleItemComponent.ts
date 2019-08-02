@@ -95,17 +95,19 @@ export class SingleItemComponent extends BaseComponent {
                 this.fields.forEach(key => {
                     const field = res.fields[key];
                     console.log(field);
-                    const name = field.name;
-                    const displayName = field.displayName;
+                    const name = field.fieldProperties.name;
+                    const displayName = field.fieldProperties.displayName;
                     const type = field.fieldProperties.fieldType;
                     const values = field.fieldProperties.possibleValues;
                     const required = field.fieldProperties.required;
+                    const internalFieldData = field.fieldProperties.arrayFieldProperties;
                     
                     this.propertyData[name] = {
                         displayName,
                         type,
                         values,
-                        required
+                        required,
+                        internalFieldData
                     };
                 });
 

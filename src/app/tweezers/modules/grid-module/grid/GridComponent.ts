@@ -81,8 +81,8 @@ export class GridComponent extends BaseComponent{
                     if (field.fieldProperties.gridIgnore)
                         continue;
                     
-                    const name = field.name;
-                    const displayName = field.displayName;
+                    const name = field.fieldProperties.name;
+                    const displayName = field.fieldProperties.displayName;
                     const type = field.fieldProperties.fieldType;
                     const values = field.fieldProperties.possibleValues;
 

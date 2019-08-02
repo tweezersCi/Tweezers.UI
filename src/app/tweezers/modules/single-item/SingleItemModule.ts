@@ -6,6 +6,7 @@ import { SingleItemControlsModule } from '../single-item-controls/SingleItemCont
 import { TweezersInfraModule } from '../infra/TweezersInfraModule';
 import { AppMaterialModule } from '../../material/AppMaterialModule';
 import { SingleItemHeaderComponent } from './single-item-header/SingleItemHeaderComponent';
+import { GridModule } from '../grid-module/GridModule';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { SingleItemHeaderComponent } from './single-item-header/SingleItemHeader
         PageNotFoundModule,
         SingleItemControlsModule,
         TweezersInfraModule,
-        AppMaterialModule
+        AppMaterialModule,
+        GridModule
     ],
     declarations: [
         SingleItemComponent,

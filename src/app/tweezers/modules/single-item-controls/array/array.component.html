@@ -1,0 +1,41 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let fieldMetadata of item[prop] | keyvalue">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ fieldMetadata.value.fieldProperties.displayName }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let propertyData of internalFields">
+      <tweezers-text-box
+        *ngIf="
+          propertyData.fieldProperties.fieldType === 'String' ||
+          propertyData.fieldProperties.fieldType === 'Integer' ||
+          propertyData.fieldProperties.fieldType === 'Password'
+        "
+        [prop]="propertyData.fieldProperties.name"
+        [header]="propertyData.fieldProperties.displayName"
+        [item]="fieldMetadata.value.fieldProperties"
+        [inputType]="propertyData.fieldProperties.fieldType"
+        [required]="propertyData.fieldProperties.required"
+      ></tweezers-text-box>
+
+      <tweezers-slider
+        *ngIf="propertyData.fieldProperties.fieldType === 'Boolean'"
+        [prop]="propertyData.fieldProperties.name"
+        [header]="propertyData.fieldProperties.displayName"
+        [item]="fieldMetadata.value.fieldProperties"
+        [required]="propertyData.fieldProperties.required"
+      ></tweezers-slider>
+
+      <tweezers-dropdown
+        *ngIf="propertyData.fieldProperties.fieldType === 'Enum'"
+        [prop]="propertyData.fieldProperties.name"
+        [displayName]="propertyData.fieldProperties.displayName"
+        [values]="propertyData.fieldProperties.possibleValues"
+        [item]="fieldMetadata.value.fieldProperties"
+        [allowNone]="!propertyData.fieldProperties.required"
+      ></tweezers-dropdown>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
