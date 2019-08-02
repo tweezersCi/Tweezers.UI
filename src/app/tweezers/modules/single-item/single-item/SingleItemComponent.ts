@@ -8,6 +8,7 @@ import { BaseComponent } from '../../base-component/BaseComponent';
 import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
 import * as _ from 'lodash';
 import { AuthenticationService } from 'src/app/tweezers/utils/authentication-service';
+import { SideMenuUpdateService } from 'src/app/tweezers/utils/side-menu-update-service';
 
 declare let window;
 
@@ -40,7 +41,8 @@ export class SingleItemComponent extends BaseComponent {
     ];
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
-        protected titleModule: Title, protected route: ActivatedRoute, protected authService: AuthenticationService) {
+        protected titleModule: Title, protected route: ActivatedRoute, protected authService: AuthenticationService,
+        protected sideMenuUpdateService: SideMenuUpdateService) {
         super(tweezCache, tweezApi, router, titleModule, authService);
         this.route.queryParamMap.subscribe(params => {
             this.newItem = params.get('newItem') === 'true';
@@ -151,6 +153,8 @@ export class SingleItemComponent extends BaseComponent {
             if (this.newItem) {
                 this.router.navigate([this.entityData.refLink, this.item[this.entityData.idField]]);
             }
+
+            this.sideMenuUpdateService.updateSideMenuRequest();
         });
     }
 
