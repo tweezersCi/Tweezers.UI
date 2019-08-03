@@ -8,7 +8,6 @@ import { ClassMetadata } from '../interfaces/class-metadata';
 export class TweezersCache {
     private metadata: any;
     private classMetadata: any;
-    private entityMetadataCache: any = {};
 
     constructor(private api: TweezersApi) {
     }
@@ -30,7 +29,6 @@ export class TweezersCache {
     async getClassMetadata(force: boolean): Promise<any>{
         if (!this.classMetadata || force) {
             this.classMetadata = await this.api.discoverBaseEntities();
-            this.entityMetadataCache = {};
         }
     
         return Promise.resolve(this.classMetadata);
@@ -38,12 +36,11 @@ export class TweezersCache {
 
     async getEntityMetadata(refLink: string): Promise<any> {
         const refLinkKey = this.api.getBaseLinkKey(refLink);
-        if (!this.entityMetadataCache || !this.entityMetadataCache[refLinkKey]) {
-            const refLinkBaseUrl = `/${refLinkKey}`;
-            console.log("base", refLinkBaseUrl);
-            this.entityMetadataCache[refLinkKey] = await this.api.getEntityMetadata(refLinkBaseUrl);
-        }
+        if (!this.classMetadata)
+            await this.getClassMetadata(true);
 
-        return Promise.resolve(this.entityMetadataCache[refLinkKey]);
+        const myClassMetadata = this.classMetadata.find(m => m._id === refLinkKey);
+
+        return Promise.resolve(myClassMetadata);
     }
 }
