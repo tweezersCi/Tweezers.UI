@@ -115,7 +115,7 @@ export class TweezersApi {
     }
 
     private handleErrors(err: HttpErrorResponse) {
-        console.log(err);
+        console.log("got err", err);
         if (err.status == 401) {
             localStorage.clear();
             this.router.navigate(['']);
@@ -134,7 +134,6 @@ export class TweezersApi {
             .append('Content-Type', 'application/json')
             .append('sessionId', sessionId);
 
-        console.log(headers);
         return headers;
     }
 }
