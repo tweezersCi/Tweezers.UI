@@ -16,6 +16,7 @@
             name="username"
             required
             autocomplete="off"
+            (keydown.enter)="onLogin()"
           />
         </mat-form-field>
 
@@ -28,6 +29,7 @@
             name="password"
             required
             autocomplete="off"
+            (keydown.enter)="onLogin()"
           />
         </mat-form-field>
       </div>
