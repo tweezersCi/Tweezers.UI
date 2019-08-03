@@ -26,6 +26,7 @@ export class ArrayComponent extends BaseComponent {
 
   ngOnInit(): void {
     this.internalFields = Object.values(this.objectReference.fields);
+    this.item[this.prop] = this.item[this.prop] || {};
   }
 
   onChange(e) {}
@@ -35,7 +36,7 @@ export class ArrayComponent extends BaseComponent {
     return isString == "string";
   }
 
-  deleteField(field: any) {
+  deleteItem(field: any) {
     delete this.item.fields[field];
   }
 
