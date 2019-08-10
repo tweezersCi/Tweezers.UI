@@ -9,8 +9,14 @@ import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
 import * as _ from 'lodash';
 import { AuthenticationService } from 'src/app/tweezers/utils/authentication-service';
 import { SideMenuUpdateService } from 'src/app/tweezers/utils/side-menu-update-service';
+import { MatSnackBar } from '@angular/material';
+import { SnackBarDefinition } from '../../infra/snack-bar/SnackBarDefinition';
+import { TweezersSnackbarService } from '../../infra/snack-bar/TweezersSnackbarService';
 
 declare let window;
+
+const ErrorIcon = "clear"
+const SuccessIcon = "done"
 
 @Component({
     selector: 'tweezers-single-item',
@@ -40,9 +46,10 @@ export class SingleItemComponent extends BaseComponent {
         }
     ];
 
+
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
         protected titleModule: Title, protected route: ActivatedRoute, protected authService: AuthenticationService,
-        protected sideMenuUpdateService: SideMenuUpdateService) {
+        protected sideMenuUpdateService: SideMenuUpdateService, private snackBarService: TweezersSnackbarService) {
         super(tweezCache, tweezApi, router, titleModule, authService);
         this.route.queryParamMap.subscribe(params => {
             this.newItem = params.get('newItem') === 'true';
@@ -157,6 +164,21 @@ export class SingleItemComponent extends BaseComponent {
             }
 
             this.sideMenuUpdateService.updateSideMenuRequest();
+        }).then(() => {
+            // success...
+            const message = "Updated";
+            const type = "success";
+            const icon = SuccessIcon;
+        
+            this.snackBarService.OpenSnackbar({message, type, icon}, 5);
+
+        }).catch((err) => {
+            // failed...
+            const message = err.error.message;
+            const type = "error";
+            const icon = ErrorIcon;
+        
+            this.snackBarService.OpenSnackbar({message, type, icon}, 5);
         });
     }
 

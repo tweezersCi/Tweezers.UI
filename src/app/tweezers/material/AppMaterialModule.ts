@@ -12,7 +12,8 @@ import {
   MatTableModule,
   MatTooltipModule,
   MatExpansionModule,
-  MatCardModule
+  MatCardModule,
+  MatSnackBarModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -33,7 +34,8 @@ import { CommonModule } from "@angular/common";
     MatTableModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   exports: [
     MatInputModule,
@@ -49,7 +51,8 @@ import { CommonModule } from "@angular/common";
     MatTableModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ]
 })
 export class AppMaterialModule {}
