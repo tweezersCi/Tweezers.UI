@@ -18,7 +18,7 @@ export class ArrayComponent extends BaseComponent {
    
   internalFields: any;
   addButton: TweezersButton = {
-    label: "Add",
+    label: "Add Field",
     icon: "add",
     clickFunction: this.addItem.bind(this),
     type: "button"

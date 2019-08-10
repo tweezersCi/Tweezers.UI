@@ -120,7 +120,7 @@ export class TweezersApi {
             localStorage.clear();
             this.router.navigate(['']);
         }
-        return Promise.reject();
+        return Promise.reject(err);
     }
 
     private Sanitize(url: string): string {

@@ -7,6 +7,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { TweezersIconComponent } from './tweezers-icon/TweezersIconComponent';
 import { HeaderComponent } from './header/HeaderComponent';
 import { RoundButtonComponent } from './round-button/RoundButtonComponent';
+import { TweezersSnackBarComponent } from './snack-bar/TweezersSnackBarComponent';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { RoundButtonComponent } from './round-button/RoundButtonComponent';
         ReactiveFormsModule,
         BrowserModule,
     ],
-    declarations: [TweezersIconComponent, HeaderComponent, RoundButtonComponent],
-    exports: [TweezersIconComponent, HeaderComponent, RoundButtonComponent]
+    declarations: [TweezersIconComponent, HeaderComponent, RoundButtonComponent, TweezersSnackBarComponent],
+    exports: [TweezersIconComponent, HeaderComponent, RoundButtonComponent, TweezersSnackBarComponent],
+    entryComponents: [TweezersSnackBarComponent]
 })
 export class TweezersInfraModule {}
