@@ -1,5 +1,5 @@
 @import '~@angular/material/theming';
-
+@import './src/assets/colors/default-color.scss';
 /*
 
 This file is responsible of the colors in the application. We use two palettes for primary and secondary colors.
@@ -42,7 +42,7 @@ or by using this site http://mcg.mbitson.com/ and copying the angularjs2 (materi
 
 */
 
-$primaryPalette: $mat-indigo;
-$secondaryPalette: $mat-pink;
+$primaryPalette: $tweezersdarkblue;
+$secondaryPalette: $mat-blue-grey;
 
 @import './src/assets/colors/colors.scss';

@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "icomoon";
+  src: url("assets/icons/icomoon/icomoon.eot");
+  src: url("assets/icons/icomoon/icomoon.eot?#iefix")
+      format("embedded-opentype"),
+    url("assets/icons/icomoon/icomoon.woff") format("woff"),
+    url("assets/icons/icomoon/icomoon.ttf") format("truetype"),
+    url("assets/icons/icomoon/icomoon.svg#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icomoon-"]:before {
+  font-family: "icomoon" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 24px;
+}
+
+.icomoon-github:before {
+  content: "\eab0";
+}

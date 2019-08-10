@@ -1,10 +1,18 @@
 <div *ngIf="item && !loading">
-  <tweezers-single-item-header [entityData]="entityData" [itemName]="item[entityData.uiTitle]" [buttons]="buttons"></tweezers-single-item-header>
+  <tweezers-single-item-header
+    [entityData]="entityData"
+    [itemName]="item[entityData.uiTitle]"
+    [buttons]="buttons"
+  ></tweezers-single-item-header>
 
   <form class="tweezers-single-item-form">
     <div *ngFor="let field of fields">
       <tweezers-text-box
-        *ngIf="propertyData[field].type === 'String' || propertyData[field].type === 'Integer' || propertyData[field].type === 'Password'"
+        *ngIf="
+          propertyData[field].type === 'String' ||
+          propertyData[field].type === 'Integer' ||
+          propertyData[field].type === 'Password'
+        "
         [prop]="field"
         [header]="propertyData[field].displayName"
         [item]="item"
@@ -32,7 +40,9 @@
       <tweezers-array
         *ngIf="propertyData[field].type === 'Array'"
         [prop]="field"
-        [objectReference]="propertyData[field].internalFieldData.objectReference"
+        [objectReference]="
+          propertyData[field].internalFieldData.objectReference
+        "
         [displayName]="propertyData[field].displayName"
         [item]="item"
         [required]="propertyData[field].required"

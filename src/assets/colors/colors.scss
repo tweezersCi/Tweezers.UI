@@ -16,19 +16,19 @@ $darker-theme: mat-light-theme($primary-darker, $accent);
 
 .layout-header, .layout-footer {
     background: mat-color($primaryPalette, 900);
-    color: mat-color($primaryPalette, 50);
+    color: mat-contrast($primaryPalette, 900);
 }
 
 .layout-sidenav {
-    background: mat-color($primaryPalette, 600);
+    background: mat-color($primaryPalette, 900);
 }
 
 .side_menu_list_item {
-    color: mat-color($primaryPalette, 50) !important;
+    color: mat-contrast($primaryPalette, 900) !important;
 }
 
 .side_menu_list_item:hover {
-    color: mat-color($primaryPalette, 100) !important;
+    color: mat-color($primaryPalette, 200) !important;
 }
 
 tr.element-row:hover {
@@ -37,16 +37,16 @@ tr.element-row:hover {
 
 
 .mat-header-cell {
-    color: mat-color($primaryPalette, 900);
+    color: mat-contrast($primaryPalette, 900);
 }
 
 .expansion-panel {
-    background: mat-color($primaryPalette, 600) !important;
+    background: mat-color($primaryPalette, 900) !important;
     box-shadow: none !important;
 }
 
 .expansion-panel-title {
-    color: mat-color($primaryPalette, 50) !important;
+    color: mat-contrast($primaryPalette, 800) !important;
 }
 
 .expansion-panel-header {
@@ -54,17 +54,25 @@ tr.element-row:hover {
 }
 
 .mat-expansion-indicator::after {
-    color: mat-color($primaryPalette, 50) !important;
+    color: mat-contrast($primaryPalette, 900) !important;
 }
 
 .mat-expansion-panel-body {
     padding: 0px 0px 0px 0px !important;
 }
 
+.tweezers-grid-text {
+    color: mat-contrast($primaryPalette, 100) !important;
+}
+
 .success {
-    color: mat-color($primaryPalette, A100);
+    color: #bef67a;
 }
 
 .error {
-    color: #d32f2f;
+    color: #fd4141;
+}
+
+.layout-text-color {
+    color: mat-contrast($primaryPalette, 900);
 }
