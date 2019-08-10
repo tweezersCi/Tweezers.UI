@@ -82,7 +82,6 @@ export class SingleItemComponent extends BaseComponent {
             const entityPromise = this.tweezApi.getEntity(url).then((res) => {
                 if (res) {
                     this.item = res;
-                    this.titleModule.setTitle(`${this.item.name} - Tweezers UI`);
                 }
             });
             promises.push(entityPromise);
@@ -141,6 +140,8 @@ export class SingleItemComponent extends BaseComponent {
                     clickFunction: this.delete.bind(this)
                 });
             }
+
+            this.titleModule.setTitle(`${this.item[this.entityData.uiTitle]} - Tweezers UI`);
 
             this.itemBackup = _.cloneDeep(this.item);
             this.loading = false;
