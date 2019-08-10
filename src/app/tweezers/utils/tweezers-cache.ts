@@ -36,11 +36,8 @@ export class TweezersCache {
 
     async getEntityMetadata(refLink: string): Promise<any> {
         const refLinkKey = this.api.getBaseLinkKey(refLink);
-        if (!this.classMetadata)
-            await this.getClassMetadata(true);
-
-        const myClassMetadata = this.classMetadata.find(m => m._id === refLinkKey);
-
+        const myClassMetadata = await this.api.getEntityMetadata(refLinkKey);
+        
         return Promise.resolve(myClassMetadata);
     }
 }
