@@ -42,6 +42,13 @@
         [item]="fieldMetadata.value.fieldProperties"
         [allowNone]="!propertyData.fieldProperties.required"
       ></tweezers-dropdown>
+
+      <tweezers-multiple-select
+        *ngIf="propertyData.fieldProperties.fieldType === 'Array'"
+        [prop]="propertyData.fieldProperties.name"
+        [displayName]="propertyData.fieldProperties.displayName"
+        [item]="fieldMetadata.value.fieldProperties"
+      ></tweezers-multiple-select>
     </div>
 
     <mat-action-row>
