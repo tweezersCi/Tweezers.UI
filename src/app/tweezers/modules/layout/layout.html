@@ -1,19 +1,34 @@
 <ng-container>
-    <mat-toolbar #header class="layout-header">
-        <mat-icon class="pointer mr10" (click)="sidenav.toggle()">{{ sidenav.opened ? 'chevron_left' : 'menu' }}</mat-icon>
-        {{ title }}
-    </mat-toolbar>
+  <mat-toolbar #header class="layout-header">
+    <mat-icon class="pointer mr10" (click)="sidenav.toggle()">{{
+      sidenav.opened ? "chevron_left" : "menu"
+    }}</mat-icon>
+    {{ title }}
+  </mat-toolbar>
 
-    <mat-sidenav-container class="layout-container">
-        <mat-sidenav #sidenav mode="side" opened class="layout-sidenav" [fixedInViewport]="false"
-            [fixedTopGap]="0" [fixedBottomGap]="0">
-            <tweezers-side-menu></tweezers-side-menu>
-        </mat-sidenav>
+  <mat-sidenav-container class="layout-container">
+    <mat-sidenav
+      #sidenav
+      mode="side"
+      opened
+      class="layout-sidenav"
+      [fixedInViewport]="false"
+      [fixedTopGap]="0"
+      [fixedBottomGap]="0"
+    >
+      <tweezers-side-menu></tweezers-side-menu>
+    </mat-sidenav>
 
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
-    <mat-toolbar #footer class="layout-footer"><p class="mat-caption">Powered by Tweezers</p></mat-toolbar>
+  <mat-toolbar #footer class="layout-footer">
+    <p class="mat-caption">
+      Powered by Tweezers
+      <a href="https://github.com/tweezers-project" style="text-decoration:none" class="ml10"
+        ><i class="icomoon-github layout-text-color"></i></a>
+    </p>
+  </mat-toolbar>
 </ng-container>
