@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TweezersApi } from 'src/app/tweezers/utils/tweezers-api';
 import { NavigationEnd, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { BaseComponent } from '../../base-component/BaseComponent';
 import * as _ from 'lodash';
 import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
 import { AuthenticationService } from 'src/app/tweezers/utils/authentication-service';
+import { MatSort } from '@angular/material/sort';
 
 declare let window;
 
@@ -16,7 +17,7 @@ declare let window;
     templateUrl: "grid.component.html",
     styleUrls: ["grid.component.css"]
 })
-export class GridComponent extends BaseComponent{
+export class GridComponent extends BaseComponent implements AfterViewInit{
     routerEventsSubscription: Subscription;
     buttons: TweezersButton[] = [
         {
@@ -29,25 +30,34 @@ export class GridComponent extends BaseComponent{
     valid: boolean;
     loading: boolean = false;
 
-    entities: any;
+    entities: any[] = [];
     headers: any;
     propertyData: any;
-    fields: string[];
-    displayedColumns: string[];
+    fields: string[] = [];
+    displayedColumns: string[] = [];
     idFieldName: string;
     refLink: string;
     gridName: string;
     iconName: string;
+
+    @ViewChild(MatSort, {static: false}) sort: MatSort;
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
         protected titleModule: Title, protected authService: AuthenticationService) {
         super(tweezCache, tweezApi, router, titleModule, authService);
         this.routerEventsSubscription = this.router.events.subscribe(ev => {
             if (ev instanceof NavigationEnd) {
-                this.loading = true;
-                this.loadGridData(ev.url);
+                this.refLink = ev.url;
+                this.loadData();
             }
         });
+
+        window.comp = this;
+    }
+
+    loadData(sortField: string = "", sortDirection: string = "asc") {
+        this.loading = true;
+        this.loadGridData(sortField, sortDirection);
     }
 
     ngOnInit(): void {
@@ -61,9 +71,16 @@ export class GridComponent extends BaseComponent{
         this.routerEventsSubscription.unsubscribe();
     }
 
-    loadGridData(refLink: string): any {
-        this.refLink = refLink;
-        const entityMetadataPromise = this.tweezCache.getEntityMetadata(refLink).then((res) => {
+    ngAfterViewInit(): void {
+        this.sort.sortChange.subscribe(async () => {
+            console.log("active: ", this.sort.active);
+            console.log("direction: ", this.sort.direction);
+            await this.loadData(this.sort.active, this.sort.direction);
+        });
+    }
+
+    loadGridData(sortField: string = "", sortDirection: string = "asc"): any {
+        const entityMetadataPromise = this.tweezCache.getEntityMetadata(this.refLink).then((res) => {
             console.log(res);
             window.grid = this;
             this.headers = {};
@@ -107,7 +124,7 @@ export class GridComponent extends BaseComponent{
             this.displayedColumns = this.fields.filter(f => f !== this.idFieldName);
         });
 
-        const entitiesPromise = this.tweezApi.getEntities(refLink).then((res) => {
+        const entitiesPromise = this.tweezApi.getEntities(`${this.refLink}?sortField=${sortField}&direction=${sortDirection}`).then((res) => {
             this.entities = res.items;
             console.log("items", this.entities);
         });
