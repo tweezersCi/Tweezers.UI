@@ -118,7 +118,7 @@ export class TweezersApi {
         console.log("got err", err);
         if (err.status == 401) {
             localStorage.clear();
-            this.router.navigate(['']);
+            window.location.href = '/login';
         }
         return Promise.reject(err);
     }
