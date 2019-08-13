@@ -100,7 +100,6 @@ export class SingleItemComponent extends BaseComponent {
                 this.fields = Object.keys(res.fields);
                 this.fields.forEach(key => {
                     const field = res.fields[key];
-                    console.log(field);
                     const name = field.fieldProperties.name;
                     const displayName = field.fieldProperties.displayName;
                     const type = field.fieldProperties.fieldType;
@@ -120,7 +119,6 @@ export class SingleItemComponent extends BaseComponent {
                 this.entityData.idField = "_id";
                 this.entityData.uiTitle = this.fields.find(f => res.fields[f].fieldProperties.uiTitle);
                 this.afterMetadataInit();
-                console.log("data", this.propertyData);
             }
         });
         promises.push(metadataPromise);
@@ -133,7 +131,6 @@ export class SingleItemComponent extends BaseComponent {
                 this.item = {};
                 this.item[this.entityData.uiTitle] = `New ${this.entityData.singleName}`;
             } else {
-                console.log("hello");
                 this.buttons.push({
                     label: "Delete",
                     icon: "delete",
@@ -151,13 +148,7 @@ export class SingleItemComponent extends BaseComponent {
 
     save() {
         const saveItem = _.cloneDeep(this.item);
-        //delete saveItem[this.entityData['idField']];
-
-        console.log("item to save", saveItem);
-        console.log(this.itemUrl);
-        
         this.tweezApi.saveEntity(this.itemUrl, saveItem, this.newItem).then(res => {
-            console.log("saved", res);
             this.item = res;
 
             if (this.newItem) {
@@ -185,7 +176,6 @@ export class SingleItemComponent extends BaseComponent {
 
     delete() {
         this.tweezApi.deleteEntity(this.itemUrl).then(res => {
-            console.log("deleted");
             this.router.navigate([this.entityData.refLink]);
         })
     }
@@ -193,7 +183,6 @@ export class SingleItemComponent extends BaseComponent {
     discard() {
         this.item = _.cloneDeep(this.itemBackup);
         window.item = this.item;
-        console.log(this.item);
     }
 
     protected afterMetadataInit() {

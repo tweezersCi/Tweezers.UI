@@ -115,7 +115,6 @@ export class TweezersApi {
     }
 
     private handleErrors(err: HttpErrorResponse) {
-        console.log("got err", err);
         if (err.status == 401) {
             localStorage.clear();
             window.location.href = '/login';
