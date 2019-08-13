@@ -16,7 +16,8 @@ import {
   MatSnackBarModule,
   MatChipsModule,
   MatSortModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatPaginatorModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -42,6 +43,7 @@ import { CommonModule } from "@angular/common";
     MatChipsModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
   ],
   exports: [
     MatInputModule,
@@ -62,6 +64,7 @@ import { CommonModule } from "@angular/common";
     MatChipsModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
   ]
 })
 export class AppMaterialModule {}
