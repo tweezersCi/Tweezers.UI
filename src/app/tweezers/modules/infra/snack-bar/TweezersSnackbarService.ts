@@ -12,7 +12,6 @@ export class TweezersSnackbarService {
     }
 
     public OpenSnackbar(definition: SnackBarDefinition, dutationSeconds: number = 5) {
-        console.log("meow");
         this.snackBar.openFromComponent(TweezersSnackBarComponent, {
             duration: dutationSeconds * 1000,
             data: definition,

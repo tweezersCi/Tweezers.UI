@@ -30,7 +30,6 @@ export class LoginComponent extends BaseComponent {
     }
 
     onLogin() {
-        console.log("logging in...");
         this.authService.login(this.username, this.password).then(res => {
             this.router.navigate(['']).then(() => {
                 window.location.href = '';

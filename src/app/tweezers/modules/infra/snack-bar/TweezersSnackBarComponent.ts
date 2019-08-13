@@ -16,7 +16,5 @@ export class TweezersSnackBarComponent {
     constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
         this.snackBarDefinition = data;
         this.icon = this.snackBarDefinition.icon;
-        console.log(this.snackBarDefinition);
-        console.log(this.icon);
     }
 }

@@ -44,7 +44,6 @@ export class SideMenuComponent extends BaseComponent {
     }
 
     updateSideMenu(): void {
-        console.log("updating side menu...");
         this.tweezCache.getClassMetadata(true).then(res => {
             this.linkData = res.filter(obj => !obj.internal);
             this.internalLinkData = res.filter(obj => obj.internal);

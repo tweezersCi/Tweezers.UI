@@ -84,7 +84,6 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
 
     loadGridData(skip: number, take: number, sortField: string = "", sortDirection: string = "asc"): any {
         const entityMetadataPromise = this.tweezCache.getEntityMetadata(this.refLink).then((res) => {
-            console.log(res);
             window.grid = this;
             this.headers = {};
             this.propertyData = {};
@@ -94,7 +93,6 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
                 this.iconName = res.icon;
                 this.titleModule.setTitle(`${this.gridName} - Tweezers UI`);
                 const keys = Object.keys(res.fields);
-                console.log(keys);
                 for (let i = 0; i < keys.length; i++) {
                     const key = keys[i];
                     const field = res.fields[key];
@@ -121,16 +119,13 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
             else { 
                 this.valid = false;
             }
-            console.log("headers", this.headers);
             this.fields = Object.keys(this.headers);
-            console.log("fields", this.fields);
             this.displayedColumns = this.fields.filter(f => f !== this.idFieldName);
         });
 
         const entitiesPromise = this.tweezApi.getEntities(`${this.refLink}?sortField=${sortField}&direction=${sortDirection}&skip=${skip}&take=${take}`).then((res) => {
             this.entities = res.items;
             this.totalLength = res.count;
-            console.log("items", this.entities);
         });
 
         Promise.all([entitiesPromise, entityMetadataPromise]).then((res) => {
