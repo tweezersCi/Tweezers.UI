@@ -35,7 +35,7 @@
         (click)="clickItem(row)"
       ></tr>
     </table>
-  </div>
 
-  <!-- <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator> -->
+    <mat-paginator [length]="totalLength" [pageSizeOptions]="[10, 20, 100]"></mat-paginator>
+  </div>
 </span>

@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, merge } from 'rxjs';
 import { TweezersApi } from 'src/app/tweezers/utils/tweezers-api';
 import { NavigationEnd, Router } from '@angular/router';
 import { TweezersCache } from 'src/app/tweezers/utils/tweezers-cache';
@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
 import { AuthenticationService } from 'src/app/tweezers/utils/authentication-service';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material';
 
 declare let window;
 
@@ -39,8 +40,10 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
     refLink: string;
     gridName: string;
     iconName: string;
+    totalLength: number;
 
     @ViewChild(MatSort, {static: false}) sort: MatSort;
+    @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
         protected titleModule: Title, protected authService: AuthenticationService) {
@@ -48,16 +51,16 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
         this.routerEventsSubscription = this.router.events.subscribe(ev => {
             if (ev instanceof NavigationEnd) {
                 this.refLink = ev.url;
-                this.loadData();
+                this.loadData(0, 10);
             }
         });
 
         window.comp = this;
     }
 
-    loadData(sortField: string = "", sortDirection: string = "asc") {
+    loadData(skip: number, take: number, sortField: string = "", sortDirection: string = "asc") {
         this.loading = true;
-        this.loadGridData(sortField, sortDirection);
+        this.loadGridData(skip, take, sortField, sortDirection);
     }
 
     ngOnInit(): void {
@@ -72,14 +75,14 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
     }
 
     ngAfterViewInit(): void {
-        this.sort.sortChange.subscribe(async () => {
-            console.log("active: ", this.sort.active);
-            console.log("direction: ", this.sort.direction);
-            await this.loadData(this.sort.active, this.sort.direction);
+        merge(this.sort.sortChange, this.paginator.page).subscribe(async () => {
+            const skip = this.paginator.pageIndex * this.paginator.pageSize;
+            const take = this.paginator.pageSize
+            await this.loadData(skip, take, this.sort.active, this.sort.direction);
         });
     }
 
-    loadGridData(sortField: string = "", sortDirection: string = "asc"): any {
+    loadGridData(skip: number, take: number, sortField: string = "", sortDirection: string = "asc"): any {
         const entityMetadataPromise = this.tweezCache.getEntityMetadata(this.refLink).then((res) => {
             console.log(res);
             window.grid = this;
@@ -124,8 +127,9 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
             this.displayedColumns = this.fields.filter(f => f !== this.idFieldName);
         });
 
-        const entitiesPromise = this.tweezApi.getEntities(`${this.refLink}?sortField=${sortField}&direction=${sortDirection}`).then((res) => {
+        const entitiesPromise = this.tweezApi.getEntities(`${this.refLink}?sortField=${sortField}&direction=${sortDirection}&skip=${skip}&take=${take}`).then((res) => {
             this.entities = res.items;
+            this.totalLength = res.count;
             console.log("items", this.entities);
         });
 
