@@ -1,12 +1,29 @@
 table {
-    width: 100%;
+  width: 100%;
 }
 
 tr.element-row {
-    transition: background 150ms ease-out;
+  transition: background 150ms ease-out;
 }
 
 .mat-header-cell {
-    font-size: 13px;
-    font-weight: bold;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-container {
+    position: relative;
+    overflow: auto;
 }
