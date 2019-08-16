@@ -106,13 +106,15 @@ export class SingleItemComponent extends BaseComponent {
                     const values = field.fieldProperties.possibleValues;
                     const required = field.fieldProperties.required;
                     const internalFieldData = field.fieldProperties.arrayFieldProperties;
+                    const suffix = field.fieldProperties.numericSuffix;
                     
                     this.propertyData[name] = {
                         displayName,
                         type,
                         values,
                         required,
-                        internalFieldData
+                        internalFieldData,
+                        suffix,
                     };
                 });
 

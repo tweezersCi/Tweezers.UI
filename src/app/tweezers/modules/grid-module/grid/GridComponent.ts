@@ -102,12 +102,12 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
                     const name = field.fieldProperties.name;
                     const displayName = field.fieldProperties.displayName;
                     const type = field.fieldProperties.fieldType;
-                    const values = field.fieldProperties.possibleValues;
+                    const suffix = field.fieldProperties.numericSuffix;
 
                     this.propertyData[name] = {
                         displayName,
                         type,
-                        values: _.invertBy(values)
+                        suffix
                     };
 
                     this.idFieldName = "_id";
@@ -123,10 +123,11 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
             this.displayedColumns = this.fields.filter(f => f !== this.idFieldName);
         });
 
-        const entitiesPromise = this.tweezApi.getEntities(`${this.refLink}?sortField=${sortField}&direction=${sortDirection}&skip=${skip}&take=${take}`).then((res) => {
-            this.entities = res.items;
-            this.totalLength = res.count;
-        });
+        const entitiesPromise = this.tweezApi.getEntities(`${this.refLink}?sortField=${sortField}&direction=${sortDirection}&skip=${skip}&take=${take}`)
+            .then((res) => {
+                this.entities = res.items;
+                this.totalLength = res.count;
+            });
 
         Promise.all([entitiesPromise, entityMetadataPromise]).then((res) => {
             this.loading = false;
@@ -138,7 +139,8 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
     }
 
     stringify(item: any, field: string) {
-        return item[field];
+        const suffix = !!this.propertyData[field].suffix ? ` ${this.propertyData[field].suffix}` : '';
+        return `${item[field]}${suffix}`;
     }
 
     onAddItemClicked() {
