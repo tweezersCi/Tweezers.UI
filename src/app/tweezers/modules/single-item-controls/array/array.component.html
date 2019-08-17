@@ -44,7 +44,7 @@
       ></tweezers-dropdown>
 
       <tweezers-multiple-select
-        *ngIf="propertyData.fieldProperties.fieldType === 'Array'"
+        *ngIf="propertyData.fieldProperties.fieldType === 'TagsArray'"
         [prop]="propertyData.fieldProperties.name"
         [displayName]="propertyData.fieldProperties.displayName"
         [item]="fieldMetadata.value.fieldProperties"
