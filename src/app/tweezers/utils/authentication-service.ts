@@ -21,6 +21,12 @@ export class AuthenticationService {
         });
     }
 
+    public async isInitialized() {
+        return this.tweezApi.get(`${this.tweezApi.baseUrl}/api/metadata`).then((res) => {
+            return Promise.resolve(res.IsInitialized);
+        });
+    }
+
     public isLoggedIn() {
         return localStorage && !!localStorage["sessionId"];
     }

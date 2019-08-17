@@ -74,7 +74,7 @@ export class TweezersApi {
         return this.post(url, loginRequest);
     }
 
-    private async get(url: string): Promise<any> {
+    public async get(url: string): Promise<any> {
         return this.http.get(url, {headers: this.getHeaders()}).toPromise().then((res: any) => {
             if (res) {
                 return res;
@@ -116,7 +116,7 @@ export class TweezersApi {
 
     private handleErrors(err: HttpErrorResponse) {
         if (err.status == 401) {
-            localStorage.clear();
+            localStorage.removeItem("sessionId");
             window.location.href = '/login';
         }
         return Promise.reject(err);

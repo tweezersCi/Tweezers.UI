@@ -20,6 +20,7 @@ import { BaseComponent } from './tweezers/modules/base-component/BaseComponent';
 import { TweezersInfraModule } from './tweezers/modules/infra/TweezersInfraModule';
 import { SingleItemControlsModule } from './tweezers/modules/single-item-controls/SingleItemControlsModule';
 import { LoginModule } from './tweezers/modules/login/LoginModule';
+import { InitializerModule } from './tweezers/modules/initializer/InitializerModule';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { LoginModule } from './tweezers/modules/login/LoginModule';
     SideMenuModule,
     SingleItemControlsModule,
     LoginModule,
+    InitializerModule,
   ],
   providers: [TweezersApi, HttpClient],
   bootstrap: [AppComponent]

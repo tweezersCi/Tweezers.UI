@@ -27,6 +27,7 @@ export class LoginComponent extends BaseComponent {
     ];
 
     ngOnInit(): void {
+        console.log("login");
     }
 
     onLogin() {

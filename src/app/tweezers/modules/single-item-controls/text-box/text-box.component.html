@@ -5,5 +5,5 @@
         (change)="onChange($event)"
         [type]="determineInputType()"
         [required]="required">
-    <span *ngIf="!!suffix" matSuffix>{{suffix}}</span>
+    <span *ngIf="!!suffix" matSuffix>&nbsp;{{suffix}}</span>
 </mat-form-field>
