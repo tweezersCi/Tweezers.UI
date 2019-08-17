@@ -48,6 +48,13 @@
         [item]="item"
         [required]="propertyData[field].required"
       ></tweezers-array>
+
+      <tweezers-multiple-select
+        *ngIf="propertyData[field].type === 'TagsArray'"
+        [prop]="field"
+        [displayName]="propertyData[field].displayName"
+        [item]="item"
+      ></tweezers-multiple-select>
     </div>
   </form>
 </div>
