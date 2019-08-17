@@ -1,2 +1,5 @@
-<layout *ngIf="isLoggedIn"></layout>
-<login *ngIf="!isLoggedIn"></login>
+<div *ngIf="!loading">
+  <layout *ngIf="isLoggedIn && isInitialized"></layout>
+  <login *ngIf="!isLoggedIn && isInitialized"></login>
+  <initializer *ngIf="!isInitialized"></initializer>
+</div>

@@ -1,0 +1,116 @@
+<mat-card class="initializer-card" *ngIf="cardNumber === 0" [@fadeInOut]>
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>Welcome to Tweezers</mat-card-title>
+    <mat-card-subtitle>Please set your Tweezers settings</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="initializer-form" autocomplete="off">
+      <div>
+        <tweezers-text-box
+          prop="title"
+          header="Application Title"
+          [item]="initialDetails.appDetails"
+          inputType="String"
+          [required]="true"
+        ></tweezers-text-box>
+
+        <tweezers-text-box
+          prop="initialUsername"
+          header="Initial Username"
+          [item]="initialDetails.appDetails"
+          inputType="String"
+          [required]="true"
+        ></tweezers-text-box>
+
+        <tweezers-text-box
+          prop="initialPassword"
+          header="Initial Password"
+          [item]="initialDetails.appDetails"
+          inputType="Password"
+          [required]="true"
+        ></tweezers-text-box>
+
+        <tweezers-slider
+          prop="canChangeSchema"
+          header="Allow Schema Management"
+          [item]="initialDetails.appDetails"
+          [required]="true"
+        ></tweezers-slider>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <ng-container *ngFor="let button of firstCardButtons">
+      <tweezers-round-button [buttonDetails]="button"></tweezers-round-button>
+      <div class="divider flr"></div>
+    </ng-container>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="initializer-card" *ngIf="cardNumber === 1" [@fadeInOut]>
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>Welcome to Tweezers</mat-card-title>
+    <mat-card-subtitle>Please set your Database details</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="initializer-form" autocomplete="off">
+      <div>
+        <tweezers-dropdown
+          prop="dbType"
+          displayName="Database Type"
+          [values]="dbValues"
+          [item]="initialDetails.dbDetails"
+          [allowNone]="false"
+        ></tweezers-dropdown>
+
+        <tweezers-text-box
+          prop="host"
+          header="Database Hostname"
+          [item]="initialDetails.dbDetails"
+          inputType="String"
+          [required]="true"
+        ></tweezers-text-box>
+
+        <tweezers-text-box
+          prop="port"
+          header="Database Port"
+          [item]="initialDetails.dbDetails"
+          inputType="Integer"
+          [required]="true"
+        ></tweezers-text-box>
+
+        <tweezers-text-box
+          prop="dbName"
+          header="Database Name"
+          [item]="initialDetails.dbDetails"
+          inputType="String"
+          [required]="true"
+        ></tweezers-text-box>
+
+        <tweezers-text-box
+          prop="username"
+          header="Database Username"
+          [item]="initialDetails.dbDetails"
+          inputType="String"
+          [required]="true"
+        ></tweezers-text-box>
+
+        <tweezers-text-box
+          prop="password"
+          header="Database Password"
+          [item]="initialDetails.dbDetails"
+          inputType="Password"
+          [required]="true"
+        ></tweezers-text-box>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <ng-container *ngFor="let button of secondCardButtons">
+      <tweezers-round-button [buttonDetails]="button"></tweezers-round-button>
+      <div class="divider flr"></div>
+    </ng-container>
+  </mat-card-actions>
+</mat-card>

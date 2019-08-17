@@ -48,6 +48,10 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
         protected titleModule: Title, protected authService: AuthenticationService) {
         super(tweezCache, tweezApi, router, titleModule, authService);
+
+        this.refLink = this.router.url;
+        this.loadData(0, 10);
+        
         this.routerEventsSubscription = this.router.events.subscribe(ev => {
             if (ev instanceof NavigationEnd) {
                 this.refLink = ev.url;
