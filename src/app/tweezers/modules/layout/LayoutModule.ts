@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { SideMenuModule } from '../side-menu/SideMenuModule';
+import { TweezersInfraModule } from '../infra/TweezersInfraModule';
+import { LoginModule } from '../login/LoginModule';
 
 @NgModule({
     imports: [
@@ -15,7 +17,9 @@ import { SideMenuModule } from '../side-menu/SideMenuModule';
         FormsModule,
         ReactiveFormsModule,
         BrowserModule,
-        SideMenuModule
+        SideMenuModule,
+        TweezersInfraModule,
+        LoginModule
     ],
     declarations: [LayoutComponent],
     exports: [LayoutComponent]

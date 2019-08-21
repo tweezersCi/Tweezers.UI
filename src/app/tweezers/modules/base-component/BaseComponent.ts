@@ -11,7 +11,7 @@ import { AuthenticationService } from '../../utils/authentication-service';
 })
 export class BaseComponent {
     constructor(protected tweezCache: TweezersCache, protected tweezApi: TweezersApi,
-         protected router: Router, protected titleModule: Title, protected authService:AuthenticationService) {
+        protected router: Router, protected titleModule: Title, protected authService:AuthenticationService) {
         
     }
 }

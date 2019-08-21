@@ -6,6 +6,7 @@ import { PageNotFoundModule } from '../page-not-found-module/PageNotFoundModule'
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ChangePasswordDialog } from './change-password/ChangePasswordDialog';
 
 @NgModule({
     imports: [
@@ -17,10 +18,13 @@ import { FormsModule } from '@angular/forms';
         FormsModule
     ],
     declarations: [
-        LoginComponent
+        LoginComponent,
+        ChangePasswordDialog
     ],
     exports: [
-        LoginComponent
+        LoginComponent,
+        ChangePasswordDialog
     ],
+    entryComponents: [ChangePasswordDialog]
 })
 export class LoginModule { }

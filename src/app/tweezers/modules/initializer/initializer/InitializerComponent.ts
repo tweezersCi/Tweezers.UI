@@ -84,7 +84,7 @@ export class InitializerComponent extends BaseComponent {
   ];
 
   ngOnInit(): void {
-    console.log("initializer");
+    this.titleModule.setTitle("Welcome to Tweezers!");
   }
 
   onSave() {
