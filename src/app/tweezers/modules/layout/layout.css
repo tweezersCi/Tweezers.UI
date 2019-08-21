@@ -26,3 +26,8 @@
     left: 0;
     right: 0;
 }
+
+.right-align {
+    text-align: right;
+    width: 100%;
+}

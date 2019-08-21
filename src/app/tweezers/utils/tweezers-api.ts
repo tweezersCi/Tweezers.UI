@@ -74,6 +74,22 @@ export class TweezersApi {
         return this.post(url, loginRequest);
     }
 
+    public async logout() {
+        const url = this.Sanitize(`${this.baseUrl}/api/logout`);
+        return this.post(url, {});
+    }
+
+    public async changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string) {
+        const data = {
+            oldPassword,
+            newPassword,
+            confirmNewPassword,
+        };
+
+        const url = this.Sanitize(`${this.baseUrl}/api/tweezers-user/reset-password`);
+        return this.post(url, data);
+    }
+
     public async get(url: string): Promise<any> {
         return this.http.get(url, {headers: this.getHeaders()}).toPromise().then((res: any) => {
             if (res) {

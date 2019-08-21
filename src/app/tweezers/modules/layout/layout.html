@@ -4,6 +4,32 @@
       sidenav.opened ? "chevron_left" : "menu"
     }}</mat-icon>
     {{ title }}
+
+    <div class="right-align">
+      <button
+        mat-icon-button
+        matTooltip="Account properties"
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>person</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item disabled>
+          <mat-icon>person</mat-icon>
+          <span>Hello {{ userFullName }}</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="openChangePasswordDialog()">
+          <mat-icon>cached</mat-icon>
+          <span>Change Password</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>power_off</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
   </mat-toolbar>
 
   <mat-sidenav-container class="layout-container">
@@ -27,8 +53,12 @@
   <mat-toolbar #footer class="layout-footer">
     <p class="mat-caption">
       Powered by Tweezers
-      <a href="https://github.com/tweezers-project" style="text-decoration:none" class="ml10"
-        ><i class="icomoon-github layout-text-color"></i></a>
+      <a
+        href="https://github.com/tweezers-project"
+        style="text-decoration:none"
+        class="ml10"
+        ><i class="icomoon-github layout-text-color"></i
+      ></a>
     </p>
   </mat-toolbar>
 </ng-container>

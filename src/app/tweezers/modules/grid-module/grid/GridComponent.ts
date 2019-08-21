@@ -51,7 +51,7 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
 
         this.refLink = this.router.url;
         this.loadData(0, 10);
-        
+
         this.routerEventsSubscription = this.router.events.subscribe(ev => {
             if (ev instanceof NavigationEnd) {
                 this.refLink = ev.url;
@@ -143,6 +143,10 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
     }
 
     stringify(item: any, field: string) {
+        if (!item[field]) {
+            return '';
+        }
+        
         const suffix = !!this.propertyData[field].suffix ? ` ${this.propertyData[field].suffix}` : '';
         return `${item[field]}${suffix}`;
     }

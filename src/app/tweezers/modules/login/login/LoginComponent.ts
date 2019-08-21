@@ -27,7 +27,7 @@ export class LoginComponent extends BaseComponent {
     ];
 
     ngOnInit(): void {
-        console.log("login");
+        this.titleModule.setTitle("Login - Tweezers");
     }
 
     onLogin() {
