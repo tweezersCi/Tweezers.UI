@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { BaseComponent } from '../../base-component/BaseComponent';
-import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
+import { Component } from "@angular/core";
+import { BaseComponent } from "../../base-component/BaseComponent";
+import { TweezersButton } from "src/app/tweezers/interfaces/tweezers-button";
 
 @Component({
-    selector: 'login',
+    selector: "login",
     templateUrl: "login.component.html",
     styleUrls: ["login.component.css"],
 })
@@ -32,10 +32,10 @@ export class LoginComponent extends BaseComponent {
 
     onLogin() {
         this.authService.login(this.username, this.password).then(res => {
-            this.router.navigate(['']).then(() => {
-                window.location.href = '';
+            this.router.navigate([""]).then(() => {
+                window.location.href = "";
             });
-            
+
         });
     }
 

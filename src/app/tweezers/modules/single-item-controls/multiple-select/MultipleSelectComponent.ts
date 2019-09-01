@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { BaseComponent } from "../../base-component/BaseComponent";
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material';
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
+import { MatChipInputEvent } from "@angular/material";
 
 @Component({
   selector: "tweezers-multiple-select",

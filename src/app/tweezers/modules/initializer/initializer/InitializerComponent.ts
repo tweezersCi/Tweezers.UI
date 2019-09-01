@@ -31,7 +31,7 @@ declare let window;
 })
 export class InitializerComponent extends BaseComponent {
   title: string;
-  cardNumber: number = 0;
+  cardNumber = 0;
 
   initialDetails: InitialDetails = {
     dbDetails: {

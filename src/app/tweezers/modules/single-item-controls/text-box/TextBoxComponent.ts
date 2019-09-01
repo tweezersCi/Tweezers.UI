@@ -1,17 +1,17 @@
 import { Component, Input } from "@angular/core";
-import { BaseComponent } from '../../base-component/BaseComponent';
+import { BaseComponent } from "../../base-component/BaseComponent";
 
 @Component({
-    selector: 'tweezers-text-box',
-    templateUrl: 'text-box.component.html',
-    styleUrls: ['text-box.component.css']
+    selector: "tweezers-text-box",
+    templateUrl: "text-box.component.html",
+    styleUrls: ["text-box.component.css"]
 })
-export class TextBoxComponent extends BaseComponent{
+export class TextBoxComponent extends BaseComponent {
     @Input() prop: string;
     @Input() header: string;
     @Input() item: any;
     @Input() inputType: string;
-    @Input() required: boolean = false;
+    @Input() required = false;
     @Input() suffix: string = null;
 
     ngOnInit(): void {

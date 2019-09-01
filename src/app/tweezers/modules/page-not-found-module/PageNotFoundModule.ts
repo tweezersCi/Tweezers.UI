@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { PageNotFoundComponent } from './PageNotFoundComponent';
+import { PageNotFoundComponent } from "./PageNotFoundComponent";
 
 @NgModule({
     declarations: [PageNotFoundComponent],

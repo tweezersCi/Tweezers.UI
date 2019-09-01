@@ -35,7 +35,7 @@ export class AuthenticationService {
   }
 
   public isLoggedIn() {
-    return localStorage && !!localStorage["sessionId"];
+    return localStorage && !!localStorage.sessionId;
   }
 
   public logout() {

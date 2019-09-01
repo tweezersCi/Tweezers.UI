@@ -2,11 +2,11 @@ import { Component, ViewChild, ElementRef } from "@angular/core";
 import { BaseComponent } from "../base-component/BaseComponent";
 import { MatDrawer, MatToolbar, MatDialog } from "@angular/material";
 import { ChangePasswordDialog } from "../login/change-password/ChangePasswordDialog";
-import { TweezersCache } from '../../utils/tweezers-cache';
-import { TweezersApi } from '../../utils/tweezers-api';
-import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { AuthenticationService } from '../../utils/authentication-service';
+import { TweezersCache } from "../../utils/tweezers-cache";
+import { TweezersApi } from "../../utils/tweezers-api";
+import { Router } from "@angular/router";
+import { Title } from "@angular/platform-browser";
+import { AuthenticationService } from "../../utils/authentication-service";
 
 declare let window;
 
@@ -21,8 +21,8 @@ export class LayoutComponent extends BaseComponent {
   userFullName: string;
 
   constructor(protected tweezCache: TweezersCache, protected tweezApi: TweezersApi,
-    protected router: Router, protected titleModule: Title, protected authService:AuthenticationService, 
-    public dialog: MatDialog) {
+              protected router: Router, protected titleModule: Title, protected authService: AuthenticationService,
+              public dialog: MatDialog) {
         super(tweezCache, tweezApi, router, titleModule, authService);
     }
 

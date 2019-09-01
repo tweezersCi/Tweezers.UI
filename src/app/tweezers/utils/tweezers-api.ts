@@ -1,23 +1,23 @@
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { config } from '../../../../tweezers-conf.json'
-import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { config } from "../../../../tweezers-conf.json";
+import { Router } from "@angular/router";
 
 declare let window: any;
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: "root"
 })
 export class TweezersApi {
     public baseUrl: string;
-    
+
     constructor(private http: HttpClient, private router: Router) {
         window.tweezApi = this;
         this.baseUrl = config.url;
     }
 
     public getBaseLinkKey(refLink: string) {
-        const parts = refLink.split('/').filter(el => el);
+        const parts = refLink.split("/").filter(el => el);
         const refLinkKey = parts.find(el => true);
         return refLinkKey;
     }
@@ -53,7 +53,7 @@ export class TweezersApi {
     }
 
     public async saveEntity(itemUrl: string, item: any, isNew: boolean = false): Promise<any> {
-        const url = isNew 
+        const url = isNew
             ? this.Sanitize(`${this.baseUrl}/api/${this.getBaseLinkKey(itemUrl)}`)
             : this.Sanitize(`${this.baseUrl}/api/${itemUrl}`);
         return isNew ? this.post(url, item) : this.patch(url, item);
@@ -133,21 +133,21 @@ export class TweezersApi {
     private handleErrors(err: HttpErrorResponse) {
         if (err.status == 401) {
             localStorage.removeItem("sessionId");
-            window.location.href = '/login';
+            window.location.href = "/login";
         }
         return Promise.reject(err);
     }
 
     private Sanitize(url: string): string {
-        return url.replace(/(https?:\/\/)|(\/){2,}/g, "$1$2")
+        return url.replace(/(https?:\/\/)|(\/){2,}/g, "$1$2");
     }
 
     private getHeaders() {
-        const sessionId = localStorage.getItem('sessionId') || '';
-        let headers = new HttpHeaders()
-            .append('Accept', 'application/json')
-            .append('Content-Type', 'application/json')
-            .append('sessionId', sessionId);
+        const sessionId = localStorage.getItem("sessionId") || "";
+        const headers = new HttpHeaders()
+            .append("Accept", "application/json")
+            .append("Content-Type", "application/json")
+            .append("sessionId", sessionId);
 
         return headers;
     }

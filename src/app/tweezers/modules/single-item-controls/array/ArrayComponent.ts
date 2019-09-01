@@ -10,12 +10,12 @@ import { TweezersButton } from "src/app/tweezers/interfaces/tweezers-button";
 export class ArrayComponent extends BaseComponent {
   @Input() prop: string;
   @Input() item: any;
-  @Input() required: boolean = false;
+  @Input() required = false;
   @Input() objectReference: any;
   @Input() displayName: string;
 
   fieldNum = 1;
-   
+
   internalFields: any;
   addButton: TweezersButton = {
     label: "Add Field",
@@ -41,13 +41,13 @@ export class ArrayComponent extends BaseComponent {
   }
 
   addItem() {
-    const newField = { 
+    const newField = {
         name: "new_field_" + this.fieldNum,
         displayName: "New Field " + this.fieldNum,
         newItem: true
     };
     this.fieldNum++;
 
-    this.item[this.prop][newField["name"]] = {fieldProperties: newField};
+    this.item[this.prop][newField.name] = {fieldProperties: newField};
   }
 }
