@@ -1,24 +1,24 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { Subscription, merge } from 'rxjs';
-import { TweezersApi } from 'src/app/tweezers/utils/tweezers-api';
-import { NavigationEnd, Router } from '@angular/router';
-import { TweezersCache } from 'src/app/tweezers/utils/tweezers-cache';
-import { Title } from '@angular/platform-browser';
-import { BaseComponent } from '../../base-component/BaseComponent';
-import * as _ from 'lodash';
-import { TweezersButton } from 'src/app/tweezers/interfaces/tweezers-button';
-import { AuthenticationService } from 'src/app/tweezers/utils/authentication-service';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material';
+import { Component, ViewChild, AfterViewInit } from "@angular/core";
+import { Subscription, merge } from "rxjs";
+import { TweezersApi } from "src/app/tweezers/utils/tweezers-api";
+import { NavigationEnd, Router } from "@angular/router";
+import { TweezersCache } from "src/app/tweezers/utils/tweezers-cache";
+import { Title } from "@angular/platform-browser";
+import { BaseComponent } from "../../base-component/BaseComponent";
+import * as _ from "lodash";
+import { TweezersButton } from "src/app/tweezers/interfaces/tweezers-button";
+import { AuthenticationService } from "src/app/tweezers/utils/authentication-service";
+import { MatSort } from "@angular/material/sort";
+import { MatPaginator } from "@angular/material";
 
 declare let window;
 
 @Component({
-    selector: 'tweezers-grid',
+    selector: "tweezers-grid",
     templateUrl: "grid.component.html",
     styleUrls: ["grid.component.css"]
 })
-export class GridComponent extends BaseComponent implements AfterViewInit{
+export class GridComponent extends BaseComponent implements AfterViewInit {
     routerEventsSubscription: Subscription;
     buttons: TweezersButton[] = [
         {
@@ -27,9 +27,9 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
             clickFunction: this.onAddItemClicked.bind(this),
         }
     ];
-    
+
     valid: boolean;
-    loading: boolean = false;
+    loading = false;
 
     entities: any[] = [];
     headers: any;
@@ -46,7 +46,7 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
     @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
-        protected titleModule: Title, protected authService: AuthenticationService) {
+                protected titleModule: Title, protected authService: AuthenticationService) {
         super(tweezCache, tweezApi, router, titleModule, authService);
 
         this.refLink = this.router.url;
@@ -68,20 +68,20 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
     }
 
     ngOnInit(): void {
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
+        // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        // Add 'implements OnInit' to the class.
     }
 
     ngOnDestroy(): void {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
+        // Called once, before the instance is destroyed.
+        // Add 'implements OnDestroy' to the class.
         this.routerEventsSubscription.unsubscribe();
     }
 
     ngAfterViewInit(): void {
         merge(this.sort.sortChange, this.paginator.page).subscribe(async () => {
             const skip = this.paginator.pageIndex * this.paginator.pageSize;
-            const take = this.paginator.pageSize
+            const take = this.paginator.pageSize;
             await this.loadData(skip, take, this.sort.active, this.sort.direction);
         });
     }
@@ -100,9 +100,10 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
                 for (let i = 0; i < keys.length; i++) {
                     const key = keys[i];
                     const field = res.fields[key];
-                    if (field.fieldProperties.gridIgnore)
+                    if (field.fieldProperties.gridIgnore) {
                         continue;
-                    
+                    }
+
                     const name = field.fieldProperties.name;
                     const displayName = field.fieldProperties.displayName;
                     const type = field.fieldProperties.fieldType;
@@ -116,11 +117,10 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
 
                     this.idFieldName = "_id";
                     this.headers[name] = displayName;
-                };
-                
+                }
+
                 this.valid = true;
-            }
-            else { 
+            } else {
                 this.valid = false;
             }
             this.fields = Object.keys(this.headers);
@@ -144,14 +144,14 @@ export class GridComponent extends BaseComponent implements AfterViewInit{
 
     stringify(item: any, field: string) {
         if (!item[field]) {
-            return '';
+            return "";
         }
-        
-        const suffix = !!this.propertyData[field].suffix ? ` ${this.propertyData[field].suffix}` : '';
+
+        const suffix = !!this.propertyData[field].suffix ? ` ${this.propertyData[field].suffix}` : "";
         return `${item[field]}${suffix}`;
     }
 
     onAddItemClicked() {
-        this.router.navigate([this.refLink, 'newItem'], {queryParams: {newItem: true}});
+        this.router.navigate([this.refLink, "newItem"], {queryParams: {newItem: true}});
     }
 }

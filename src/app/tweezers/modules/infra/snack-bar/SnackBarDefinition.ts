@@ -1,5 +1,5 @@
 export interface SnackBarDefinition {
-    message: string,
-    type: string,
-    icon?: string,
+    message: string;
+    type: string;
+    icon?: string;
 }
