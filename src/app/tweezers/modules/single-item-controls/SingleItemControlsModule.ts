@@ -10,6 +10,7 @@ import { SliderComponent } from "./slider/SliderComponent";
 import { ArrayComponent } from "./array/ArrayComponent";
 import { TweezersInfraModule } from "../infra/TweezersInfraModule";
 import { MultipleSelectComponent } from "./multiple-select/MultipleSelectComponent";
+import { InternalObjectComponent } from './internal-object/InternalObjectComponent';
 
 @NgModule({
     imports: [
@@ -21,7 +22,7 @@ import { MultipleSelectComponent } from "./multiple-select/MultipleSelectCompone
         BrowserModule,
         TweezersInfraModule,
     ],
-    declarations: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent, MultipleSelectComponent],
-    exports: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent, MultipleSelectComponent]
+    declarations: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent, MultipleSelectComponent, InternalObjectComponent],
+    exports: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent, MultipleSelectComponent, InternalObjectComponent]
 })
 export class SingleItemControlsModule {}
