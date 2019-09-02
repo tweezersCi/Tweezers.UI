@@ -76,3 +76,7 @@ tr.element-row:hover {
 .layout-text-color {
     color: mat-contrast($primaryPalette, 900);
 }
+
+.expansion-panel-header-text-color {
+    color: mat-color($primaryPalette, 900) !important;
+}
