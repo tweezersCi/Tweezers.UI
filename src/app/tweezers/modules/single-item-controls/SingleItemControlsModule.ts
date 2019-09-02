@@ -10,7 +10,7 @@ import { SliderComponent } from "./slider/SliderComponent";
 import { ArrayComponent } from "./array/ArrayComponent";
 import { TweezersInfraModule } from "../infra/TweezersInfraModule";
 import { MultipleSelectComponent } from "./multiple-select/MultipleSelectComponent";
-import { InternalObjectComponent } from './internal-object/InternalObjectComponent';
+import { InternalObjectComponent } from "./internal-object/InternalObjectComponent";
 
 @NgModule({
     imports: [

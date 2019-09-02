@@ -115,10 +115,10 @@ export class SingleItemComponent extends BaseComponent {
           const type = field.fieldProperties.fieldType;
           const values = field.fieldProperties.possibleValues;
           const required = field.fieldProperties.required;
-          const internalFieldData = field.fieldProperties.arrayFieldProperties
+          const internalFieldData = field.fieldProperties.arrayFieldProperties;
           const objectReference = field.fieldProperties.objectReference;
           const suffix = field.fieldProperties.numericSuffix;
-          
+
           this.propertyData[name] = {
             displayName,
             type,
