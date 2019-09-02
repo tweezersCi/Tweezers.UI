@@ -176,7 +176,7 @@ export class SingleItemComponent extends BaseComponent {
         if (this.newItem) {
           this.router.navigate([
             this.entityData.refLink,
-            this.item[this.entityData.idField]
+            res._id
           ]);
         } else {
           this.loadData(this.itemUrl);
