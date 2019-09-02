@@ -1,0 +1,30 @@
+<mat-expansion-panel class="force-m10 w80" disabled expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title class="expansion-panel-header-text-color">
+      {{ displayName }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <div *ngFor="let propertyData of internalFields">
+    <tweezers-text-box *ngIf="
+          propertyData.fieldProperties.fieldType === 'String' ||
+          propertyData.fieldProperties.fieldType === 'Integer' ||
+          propertyData.fieldProperties.fieldType === 'Password'
+        " [prop]="propertyData.fieldProperties.name" [header]="propertyData.fieldProperties.displayName"
+      [item]="item[prop]" [inputType]="propertyData.fieldProperties.fieldType"
+      [required]="propertyData.fieldProperties.required"></tweezers-text-box>
+
+    <tweezers-slider *ngIf="propertyData.fieldProperties.fieldType === 'Boolean'"
+      [prop]="propertyData.fieldProperties.name" [header]="propertyData.fieldProperties.displayName"
+      [item]="item[prop]"></tweezers-slider>
+
+    <tweezers-dropdown *ngIf="propertyData.fieldProperties.fieldType === 'Enum'"
+      [prop]="propertyData.fieldProperties.name" [displayName]="propertyData.fieldProperties.displayName"
+      [values]="propertyData.fieldProperties.possibleValues" [item]="item[prop]"
+      [allowNone]="!propertyData.fieldProperties.required"></tweezers-dropdown>
+
+    <tweezers-multiple-select *ngIf="propertyData.fieldProperties.fieldType === 'TagsArray'"
+      [prop]="propertyData.fieldProperties.name" [displayName]="propertyData.fieldProperties.displayName"
+      [item]="item[prop]"></tweezers-multiple-select>
+  </div>
+</mat-expansion-panel>

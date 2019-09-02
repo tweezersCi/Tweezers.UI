@@ -9,8 +9,6 @@ import { TweezersButton } from "src/app/tweezers/interfaces/tweezers-button";
 import * as _ from "lodash";
 import { AuthenticationService } from "src/app/tweezers/utils/authentication-service";
 import { SideMenuUpdateService } from "src/app/tweezers/utils/side-menu-update-service";
-import { MatSnackBar } from "@angular/material";
-import { SnackBarDefinition } from "../../infra/snack-bar/SnackBarDefinition";
 import { TweezersSnackbarService } from "../../infra/snack-bar/TweezersSnackbarService";
 
 declare let window;
@@ -117,15 +115,17 @@ export class SingleItemComponent extends BaseComponent {
           const type = field.fieldProperties.fieldType;
           const values = field.fieldProperties.possibleValues;
           const required = field.fieldProperties.required;
-          const internalFieldData = field.fieldProperties.arrayFieldProperties;
+          const internalFieldData = field.fieldProperties.arrayFieldProperties
+          const objectReference = field.fieldProperties.objectReference;
           const suffix = field.fieldProperties.numericSuffix;
-
+          
           this.propertyData[name] = {
             displayName,
             type,
             values,
             required,
             internalFieldData,
+            objectReference,
             suffix
           };
         });

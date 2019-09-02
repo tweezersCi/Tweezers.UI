@@ -59,6 +59,17 @@
         [displayName]="propertyData[field].displayName"
         [item]="item"
       ></tweezers-multiple-select>
+
+      <tweezers-internal-object
+      *ngIf="propertyData[field].type === 'Object'"
+      [prop]="field"
+      [objectReference]="
+        propertyData[field].objectReference
+      "
+      [displayName]="propertyData[field].displayName"
+      [item]="item"
+      [required]="propertyData[field].required"
+    ></tweezers-internal-object>
     </div>
   </form>
 </div>
