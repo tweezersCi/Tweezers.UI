@@ -36,6 +36,11 @@
       ></tr>
     </table>
 
+    <div *ngIf="(!loading && entities.length === 0)" class="no-records">
+      No {{gridName}} found. Try adding some using
+      <tweezers-round-button [buttonDetails]="buttons[0]" class="mr10 ml10"></tweezers-round-button>
+    </div>
+
     <mat-paginator [length]="totalLength" [pageSizeOptions]="[10, 20, 100]"></mat-paginator>
   </div>
 </span>
