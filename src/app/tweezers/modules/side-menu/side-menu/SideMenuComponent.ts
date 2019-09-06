@@ -29,7 +29,8 @@ export class SideMenuComponent extends BaseComponent {
     private internalLinkData: any;
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
-                protected titleModule: Title, protected authService: AuthenticationService, protected sideMenuUpdateService: SideMenuUpdateService) {
+                protected titleModule: Title, protected authService: AuthenticationService,
+                protected sideMenuUpdateService: SideMenuUpdateService) {
         super(tweezCache, tweezApi, router, titleModule, authService);
     }
 

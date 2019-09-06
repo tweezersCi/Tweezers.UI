@@ -98,8 +98,7 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
                 this.iconName = res.icon;
                 this.titleModule.setTitle(`${this.gridName} - Tweezers UI`);
                 const keys = Object.keys(res.fields);
-                for (let i = 0; i < keys.length; i++) {
-                    const key = keys[i];
+                for (const key of keys) {
                     const field = res.fields[key];
                     if (field.fieldProperties.gridIgnore) {
                         continue;
@@ -128,7 +127,8 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
             this.displayedColumns = this.fields.filter(f => f !== this.idFieldName);
         });
 
-        const entitiesPromise = this.tweezApi.getEntities(`${this.refLink}?sortField=${sortField}&direction=${sortDirection}&skip=${skip}&take=${take}`)
+        const entitiesPromise = this.tweezApi.getEntities(
+            `${this.refLink}?sortField=${sortField}&direction=${sortDirection}&skip=${skip}&take=${take}`)
             .then((res) => {
                 this.entities = res.items;
                 this.totalLength = res.count;

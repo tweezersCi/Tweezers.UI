@@ -33,7 +33,7 @@ export class ArrayComponent extends BaseComponent {
 
   isString(val) {
     const isString = typeof val;
-    return isString == "string";
+    return isString === "string";
   }
 
   deleteItem(field: any) {

@@ -37,7 +37,7 @@ export class ChangePasswordDialog {
   }
 
   onOk(): void {
-    if (this.newPassword != this.confirmNewPassword) {
+    if (this.newPassword !== this.confirmNewPassword) {
       this.errorMsg = "Passwords do not match";
       return;
     }

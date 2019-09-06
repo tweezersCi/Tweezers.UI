@@ -18,7 +18,8 @@ import { TweezersSnackbarService } from "../../infra/snack-bar/TweezersSnackbarS
 export class LandingComponent extends BaseComponent {
 
     constructor(protected tweezApi: TweezersApi, protected tweezCache: TweezersCache, protected router: Router,
-                protected titleModule: Title, protected authService: AuthenticationService, protected snackbarService: TweezersSnackbarService) {
+                protected titleModule: Title, protected authService: AuthenticationService,
+                protected snackbarService: TweezersSnackbarService) {
         super(tweezCache, tweezApi, router, titleModule, authService);
         this.routerEventsSubscription = this.router.events.subscribe(ev => {
             if (ev instanceof NavigationEnd) {
