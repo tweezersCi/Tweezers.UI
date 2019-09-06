@@ -13,12 +13,16 @@ export class InternalObjectComponent extends BaseComponent {
   @Input() objectReference: any;
   @Input() displayName: string;
 
+  possibleValuesDict: any = {};
   fieldNum = 1;
 
   internalFields: any;
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
     this.internalFields = Object.values(this.objectReference.fields);
 
+    for(const field of this.internalFields) {
+      this.possibleValuesDict[field.fieldProperties.name] = await this.constructPossibleValues(field);
+    }
 
     this.item[this.prop] = this.item[this.prop] || {};
   }

@@ -1,5 +1,5 @@
 <div class="loading-shade" *ngIf="loading || !item">
-    <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
 
 <div *ngIf="item && !loading">
@@ -11,65 +11,72 @@
 
   <form class="tweezers-single-item-form">
     <div *ngFor="let field of fields">
-      <tweezers-text-box
-        *ngIf="
-          propertyData[field].type === 'String' ||
-          propertyData[field].type === 'Integer' ||
-          propertyData[field].type === 'Password'
-        "
-        [prop]="field"
-        [header]="propertyData[field].displayName"
-        [item]="item"
-        [inputType]="propertyData[field].type"
-        [required]="propertyData[field].required"
-        [suffix]="propertyData[field].suffix"
-      ></tweezers-text-box>
+      <ng-container *ngIf="!!propertyData[field]">
+        <tweezers-text-box
+          *ngIf="
+            propertyData[field].type === 'String' ||
+            propertyData[field].type === 'Integer' ||
+            propertyData[field].type === 'Password'
+          "
+          [prop]="field"
+          [header]="propertyData[field].displayName"
+          [item]="item"
+          [inputType]="propertyData[field].type"
+          [required]="propertyData[field].required"
+          [suffix]="propertyData[field].suffix"
+        ></tweezers-text-box>
 
-      <tweezers-slider
-        *ngIf="propertyData[field].type === 'Boolean'"
-        [prop]="field"
-        [header]="propertyData[field].displayName"
-        [item]="item"
-        [required]="propertyData[field].required"
-      ></tweezers-slider>
+        <tweezers-slider
+          *ngIf="propertyData[field].type === 'Boolean'"
+          [prop]="field"
+          [header]="propertyData[field].displayName"
+          [item]="item"
+          [required]="propertyData[field].required"
+        ></tweezers-slider>
 
-      <tweezers-dropdown
-        *ngIf="propertyData[field].type === 'Enum'"
-        [prop]="field"
-        [displayName]="propertyData[field].displayName"
-        [values]="propertyData[field].values"
-        [item]="item"
-        [allowNone]="!propertyData[field].required"
-      ></tweezers-dropdown>
+        <tweezers-dropdown
+          *ngIf="
+            propertyData[field].type === 'Enum' ||
+            (propertyData[field].type === 'Object' &&
+              !!propertyData[field].values)
+          "
+          [prop]="field"
+          [displayName]="propertyData[field].displayName"
+          [values]="propertyData[field].values"
+          [item]="item"
+          [allowNone]="!propertyData[field].required"
+        ></tweezers-dropdown>
 
-      <tweezers-array
-        *ngIf="propertyData[field].type === 'Array'"
-        [prop]="field"
-        [objectReference]="
-          propertyData[field].internalFieldData.objectReference
-        "
-        [displayName]="propertyData[field].displayName"
-        [item]="item"
-        [required]="propertyData[field].required"
-      ></tweezers-array>
+        <tweezers-array
+          *ngIf="propertyData[field].type === 'Array'"
+          [prop]="field"
+          [objectReference]="
+            propertyData[field].internalFieldData.objectReference
+          "
+          [displayName]="propertyData[field].displayName"
+          [item]="item"
+          [required]="propertyData[field].required"
+        ></tweezers-array>
 
-      <tweezers-multiple-select
-        *ngIf="propertyData[field].type === 'TagsArray'"
-        [prop]="field"
-        [displayName]="propertyData[field].displayName"
-        [item]="item"
-      ></tweezers-multiple-select>
+        <tweezers-multiple-select
+          *ngIf="propertyData[field].type === 'TagsArray'"
+          [prop]="field"
+          [displayName]="propertyData[field].displayName"
+          [item]="item"
+        ></tweezers-multiple-select>
 
-      <tweezers-internal-object
-      *ngIf="propertyData[field].type === 'Object'"
-      [prop]="field"
-      [objectReference]="
-        propertyData[field].objectReference
-      "
-      [displayName]="propertyData[field].displayName"
-      [item]="item"
-      [required]="propertyData[field].required"
-    ></tweezers-internal-object>
+        <tweezers-internal-object
+          *ngIf="
+            propertyData[field].type === 'Object' &&
+            !!propertyData[field].objectReference
+          "
+          [prop]="field"
+          [objectReference]="propertyData[field].objectReference"
+          [displayName]="propertyData[field].displayName"
+          [item]="item"
+          [required]="propertyData[field].required"
+        ></tweezers-internal-object>
+      </ng-container>
     </div>
   </form>
 </div>

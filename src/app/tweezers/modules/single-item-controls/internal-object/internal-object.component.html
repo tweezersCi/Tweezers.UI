@@ -20,7 +20,7 @@
 
     <tweezers-dropdown *ngIf="propertyData.fieldProperties.fieldType === 'Enum'"
       [prop]="propertyData.fieldProperties.name" [displayName]="propertyData.fieldProperties.displayName"
-      [values]="propertyData.fieldProperties.possibleValues" [item]="item[prop]"
+      [values]="possibleValuesDict[propertyData.fieldProperties.name]" [item]="item[prop]"
       [allowNone]="!propertyData.fieldProperties.required"></tweezers-dropdown>
 
     <tweezers-multiple-select *ngIf="propertyData.fieldProperties.fieldType === 'TagsArray'"

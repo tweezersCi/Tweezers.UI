@@ -67,6 +67,7 @@ export class SingleItemComponent extends BaseComponent {
       // Sync problems will be solved if calling the event subscription from the params one.
       this.routerEventsSubscription = this.router.events.subscribe(ev => {
         if (ev instanceof NavigationEnd && !this.loading) {
+          this.item = {};
           this.loading = true;
           this.loadData(ev.url);
         }
@@ -85,7 +86,7 @@ export class SingleItemComponent extends BaseComponent {
     // Add 'implements OnDestroy' to the class.
   }
 
-  loadData(url: string): any {
+  async loadData(url: string): Promise<any> {
     this.itemUrl = url;
     const promises = [];
     if (!this.newItem) {
@@ -97,46 +98,50 @@ export class SingleItemComponent extends BaseComponent {
       promises.push(entityPromise);
     }
 
-    const metadataPromise = this.tweezCache.getEntityMetadata(url).then(res => {
-      if (res) {
-        this.propertyData = {};
-        this.entityData = {
-          displayName: res.displayNames.pluralName,
-          singleName: res.displayNames.singularName,
-          iconName: res.icon,
-          refLink: `/${this.tweezApi.getBaseLinkKey(this.router.url)}`
-        };
-
-        this.fields = Object.keys(res.fields);
-        this.fields.forEach(key => {
-          const field = res.fields[key];
-          const name = field.fieldProperties.name;
-          const displayName = field.fieldProperties.displayName;
-          const type = field.fieldProperties.fieldType;
-          const values = field.fieldProperties.possibleValues;
-          const required = field.fieldProperties.required;
-          const internalFieldData = field.fieldProperties.arrayFieldProperties;
-          const objectReference = field.fieldProperties.objectReference;
-          const suffix = field.fieldProperties.numericSuffix;
-
-          this.propertyData[name] = {
-            displayName,
-            type,
-            values,
-            required,
-            internalFieldData,
-            objectReference,
-            suffix
+    const metadataPromise = this.tweezCache
+      .getEntityMetadata(url)
+      .then(async res => {
+        if (res) {
+          this.propertyData = {};
+          this.entityData = {
+            displayName: res.displayNames.pluralName,
+            singleName: res.displayNames.singularName,
+            iconName: res.icon,
+            refLink: `/${this.tweezApi.getBaseLinkKey(this.router.url)}`
           };
-        });
 
-        this.entityData.idField = "_id";
-        this.entityData.uiTitle = this.fields.find(
-          f => res.fields[f].fieldProperties.uiTitle
-        );
-        this.afterMetadataInit();
-      }
-    });
+          this.fields = Object.keys(res.fields);
+          this.fields.forEach(async key => {
+            const field = res.fields[key];
+            const name = field.fieldProperties.name;
+            const displayName = field.fieldProperties.displayName;
+            const type = field.fieldProperties.fieldType;
+            const required = field.fieldProperties.required;
+            const internalFieldData =
+              field.fieldProperties.arrayFieldProperties;
+            const objectReference = field.fieldProperties.objectReference;
+            const suffix = field.fieldProperties.numericSuffix;
+
+            const values = await this.constructPossibleValues(field);
+
+            this.propertyData[name] = {
+              displayName,
+              type,
+              values,
+              required,
+              internalFieldData,
+              objectReference,
+              suffix
+            };
+          });
+
+          this.entityData.idField = "_id";
+          this.entityData.uiTitle = this.fields.find(
+            f => res.fields[f].fieldProperties.uiTitle
+          );
+          this.afterMetadataInit();
+        }
+      });
     promises.push(metadataPromise);
 
     Promise.all(promises).then(res => {
@@ -145,9 +150,9 @@ export class SingleItemComponent extends BaseComponent {
 
       if (this.newItem) {
         this.item = {};
-        this.item[this.entityData.uiTitle] = `New ${
-          this.entityData.singleName
-        }`;
+        this.item[
+          this.entityData.uiTitle
+        ] = `New ${this.entityData.singleName}`;
       } else {
         if (!this.buttons.find(b => b.label === "Delete")) {
           this.buttons.push({
@@ -174,10 +179,7 @@ export class SingleItemComponent extends BaseComponent {
       .saveEntity(this.itemUrl, saveItem, this.newItem)
       .then(res => {
         if (this.newItem) {
-          this.router.navigate([
-            this.entityData.refLink,
-            res._id
-          ]);
+          this.router.navigate([this.entityData.refLink, res._id]);
         } else {
           this.loadData(this.itemUrl);
         }
@@ -203,9 +205,20 @@ export class SingleItemComponent extends BaseComponent {
   }
 
   delete() {
-    this.tweezApi.deleteEntity(this.itemUrl).then(res => {
-      this.router.navigate([this.entityData.refLink]);
-    });
+    this.tweezApi
+      .deleteEntity(this.itemUrl)
+      .then(res => {
+        this.sideMenuUpdateService.updateSideMenuRequest();
+        this.router.navigate([this.entityData.refLink]);
+      })
+      .catch(err => {
+        // failed...
+        const message = err.error.message;
+        const type = "error";
+        const icon = ErrorIcon;
+
+        this.snackBarService.OpenSnackbar({ message, type, icon }, 5);
+      });
   }
 
   discard() {

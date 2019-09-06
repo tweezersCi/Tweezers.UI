@@ -9,7 +9,7 @@ import { BaseComponent } from "../../base-component/BaseComponent";
 export class DropdownComponent extends BaseComponent {
     @Input() prop: string;
     @Input() displayName: string;
-    @Input() values: string[];
+    @Input() values: any;
     @Input() item: any;
     @Input() allowNone: boolean;
     fieldKeys: string[];
