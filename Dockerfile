@@ -1,4 +1,4 @@
-FROM node:latest as build
+FROM node:alpine as build
 
 ADD "." "/opt/tweezers.ui"
 
