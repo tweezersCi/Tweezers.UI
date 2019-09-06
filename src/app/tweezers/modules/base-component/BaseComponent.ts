@@ -18,13 +18,13 @@ export class BaseComponent {
         if (field.fieldProperties.possibleValues) {
           const possibleValues = field.fieldProperties.possibleValues;
           const valuesDict = {};
-          for(const value of possibleValues) {
+          for (const value of possibleValues) {
             valuesDict[value] = value;
           }
-    
+
           return Promise.resolve(valuesDict);
         }
-    
+
         if (field.fieldProperties.objectName) {
           const objName = field.fieldProperties.objectName;
           const take = 1024;
@@ -39,10 +39,10 @@ export class BaseComponent {
           for (const item of response.items) {
             valuesDict[item[idField]] = item[displayField];
           }
-    
+
           return Promise.resolve(valuesDict);
         }
-    
-        return Promise.resolve(null);;
+
+        return Promise.resolve(null);
       }
 }

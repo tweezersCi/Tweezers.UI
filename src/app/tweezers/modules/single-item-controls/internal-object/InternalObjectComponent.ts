@@ -20,7 +20,7 @@ export class InternalObjectComponent extends BaseComponent {
   async ngOnInit(): Promise<any> {
     this.internalFields = Object.values(this.objectReference.fields);
 
-    for(const field of this.internalFields) {
+    for (const field of this.internalFields) {
       this.possibleValuesDict[field.fieldProperties.name] = await this.constructPossibleValues(field);
     }
 

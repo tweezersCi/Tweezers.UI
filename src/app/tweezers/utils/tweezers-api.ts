@@ -131,7 +131,7 @@ export class TweezersApi {
     }
 
     private handleErrors(err: HttpErrorResponse) {
-        if (err.status == 401) {
+        if (err.status === 401) {
             localStorage.removeItem("sessionId");
             window.location.href = "/login";
         }
