@@ -54,6 +54,7 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
 
         this.routerEventsSubscription = this.router.events.subscribe(ev => {
             if (ev instanceof NavigationEnd) {
+                this.entities = [];
                 this.refLink = ev.url;
                 this.loadData(0, 10);
             }

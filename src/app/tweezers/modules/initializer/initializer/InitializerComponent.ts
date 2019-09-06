@@ -50,7 +50,7 @@ export class InitializerComponent extends BaseComponent {
     }
   };
 
-  dbValues: string[] = ["MongoDB"];
+  dbValues: any = { MongoDB: "MongoDB" };
 
   firstCardButtons: TweezersButton[] = [
     {
@@ -85,10 +85,16 @@ export class InitializerComponent extends BaseComponent {
 
   ngOnInit(): void {
     this.titleModule.setTitle("Welcome to Tweezers!");
+    localStorage.clear();
   }
 
   onSave() {
-      this.tweezApi.post(`${this.tweezApi.baseUrl}/api/metadata/initialize`, this.initialDetails).then((res) => {
+    this.tweezApi
+      .post(
+        `${this.tweezApi.baseUrl}/api/metadata/initialize`,
+        this.initialDetails
+      )
+      .then(res => {
         window.location.href = "";
       });
   }
