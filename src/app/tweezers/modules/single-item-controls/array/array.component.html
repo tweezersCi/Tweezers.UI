@@ -35,10 +35,11 @@
       ></tweezers-slider>
 
       <tweezers-dropdown
-        *ngIf="propertyData.fieldProperties.fieldType === 'Enum'"
+        *ngIf="propertyData.fieldProperties.fieldType === 'Enum' && possibleValuesDict[propertyData.fieldProperties.name]"
         [prop]="propertyData.fieldProperties.name"
         [displayName]="propertyData.fieldProperties.displayName"
-        [values]="propertyData.fieldProperties.possibleValues"
+        [values]="possibleValuesDict[propertyData.fieldProperties.name].items"
+        [icon]="possibleValuesDict[propertyData.fieldProperties.name].icon"
         [item]="fieldMetadata.value.fieldProperties"
         [allowNone]="!propertyData.fieldProperties.required"
       ></tweezers-dropdown>

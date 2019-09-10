@@ -1,3 +1,7 @@
 .dropdown {
     width: 80%;
 }
+
+.dropdown-description {
+    margin-left: 22px;
+}

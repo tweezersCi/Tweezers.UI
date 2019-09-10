@@ -14,6 +14,7 @@ export class ArrayComponent extends BaseComponent {
   @Input() objectReference: any;
   @Input() displayName: string;
 
+  possibleValuesDict: any = {};
   fieldNum = 1;
 
   internalFields: any;
@@ -24,8 +25,13 @@ export class ArrayComponent extends BaseComponent {
     type: "button"
   };
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.internalFields = Object.values(this.objectReference.fields);
+
+    for (const field of this.internalFields) {
+      this.possibleValuesDict[field.fieldProperties.name] = await this.constructPossibleValues(field);
+    }
+
     this.item[this.prop] = this.item[this.prop] || {};
   }
 
