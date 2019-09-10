@@ -6,25 +6,41 @@
   </mat-expansion-panel-header>
 
   <div *ngFor="let propertyData of internalFields">
-    <tweezers-text-box *ngIf="
-          propertyData.fieldProperties.fieldType === 'String' ||
-          propertyData.fieldProperties.fieldType === 'Integer' ||
-          propertyData.fieldProperties.fieldType === 'Password'
-        " [prop]="propertyData.fieldProperties.name" [header]="propertyData.fieldProperties.displayName"
-      [item]="item[prop]" [inputType]="propertyData.fieldProperties.fieldType"
-      [required]="propertyData.fieldProperties.required"></tweezers-text-box>
+    <tweezers-text-box
+      *ngIf="
+        propertyData.fieldProperties.fieldType === 'String' ||
+        propertyData.fieldProperties.fieldType === 'Integer' ||
+        propertyData.fieldProperties.fieldType === 'Password'
+      "
+      [prop]="propertyData.fieldProperties.name"
+      [header]="propertyData.fieldProperties.displayName"
+      [item]="item[prop]"
+      [inputType]="propertyData.fieldProperties.fieldType"
+      [required]="propertyData.fieldProperties.required"
+    ></tweezers-text-box>
 
-    <tweezers-slider *ngIf="propertyData.fieldProperties.fieldType === 'Boolean'"
-      [prop]="propertyData.fieldProperties.name" [header]="propertyData.fieldProperties.displayName"
-      [item]="item[prop]"></tweezers-slider>
+    <tweezers-slider
+      *ngIf="propertyData.fieldProperties.fieldType === 'Boolean'"
+      [prop]="propertyData.fieldProperties.name"
+      [header]="propertyData.fieldProperties.displayName"
+      [item]="item[prop]"
+    ></tweezers-slider>
 
-    <tweezers-dropdown *ngIf="propertyData.fieldProperties.fieldType === 'Enum'"
-      [prop]="propertyData.fieldProperties.name" [displayName]="propertyData.fieldProperties.displayName"
-      [values]="possibleValuesDict[propertyData.fieldProperties.name]" [item]="item[prop]"
-      [allowNone]="!propertyData.fieldProperties.required"></tweezers-dropdown>
+    <tweezers-dropdown
+      *ngIf="propertyData.fieldProperties.fieldType === 'Enum'"
+      [prop]="propertyData.fieldProperties.name"
+      [displayName]="propertyData.fieldProperties.displayName"
+      [values]="possibleValuesDict[propertyData.fieldProperties.name].items"
+      [icon]="possibleValuesDict[propertyData.fieldProperties.name].icon"
+      [item]="item[prop]"
+      [allowNone]="!propertyData.fieldProperties.required"
+    ></tweezers-dropdown>
 
-    <tweezers-multiple-select *ngIf="propertyData.fieldProperties.fieldType === 'TagsArray'"
-      [prop]="propertyData.fieldProperties.name" [displayName]="propertyData.fieldProperties.displayName"
-      [item]="item[prop]"></tweezers-multiple-select>
+    <tweezers-multiple-select
+      *ngIf="propertyData.fieldProperties.fieldType === 'TagsArray'"
+      [prop]="propertyData.fieldProperties.name"
+      [displayName]="propertyData.fieldProperties.displayName"
+      [item]="item[prop]"
+    ></tweezers-multiple-select>
   </div>
 </mat-expansion-panel>

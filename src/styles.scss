@@ -63,3 +63,11 @@ body {
   width: 100%;
   justify-content: space-between;
 }
+
+.icon-small mat-icon {
+  height: 20px;
+  width: 20px;
+  font-size: 20px;
+  position: absolute;
+  top: -2px;
+}

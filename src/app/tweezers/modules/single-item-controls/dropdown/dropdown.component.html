@@ -5,8 +5,12 @@
     (selectionChange)="onChange($event)"
     [required]="!allowNone"
   >
+    <mat-select-trigger>
+        <tweezers-icon *ngIf="!!icon" class="mr10 icon-small" [name]="icon"></tweezers-icon> <span [ngClass]="{'dropdown-description': !!icon}">{{ item[prop] }}</span>
+    </mat-select-trigger>
     <mat-option *ngIf="allowNone" [value]="null">-None-</mat-option>
     <mat-option *ngFor="let value of values | keyvalue" [value]="value.key">
+      <tweezers-icon *ngIf="!!icon" class="mr10" [name]="icon"></tweezers-icon>
       {{ value.value }}
     </mat-option>
   </mat-select>

@@ -12,6 +12,8 @@ export class DropdownComponent extends BaseComponent {
     @Input() values: any;
     @Input() item: any;
     @Input() allowNone: boolean;
+    @Input() icon = "";
+
     fieldKeys: string[];
 
     ngOnInit(): void {

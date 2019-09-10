@@ -42,7 +42,8 @@
           "
           [prop]="field"
           [displayName]="propertyData[field].displayName"
-          [values]="propertyData[field].values"
+          [values]="propertyData[field].values.items"
+          [icon]="propertyData[field].values.icon"
           [item]="item"
           [allowNone]="!propertyData[field].required"
         ></tweezers-dropdown>

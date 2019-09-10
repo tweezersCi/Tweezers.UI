@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { TweezersApi } from "./tweezers-api";
-import { ClassMetadata } from "../interfaces/class-metadata";
 
 @Injectable({
     providedIn: "root"
