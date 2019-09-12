@@ -1,12 +1,9 @@
 <mat-form-field class="dropdown ml10 mt10">
-  <mat-select
-    [placeholder]="displayName"
-    [value]="item[prop]"
-    (selectionChange)="onChange($event)"
-    [required]="!allowNone"
-  >
+  <mat-select [placeholder]="displayName" [value]="item[prop]" (selectionChange)="onChange($event)"
+    [required]="!allowNone">
     <mat-select-trigger>
-        <tweezers-icon *ngIf="!!icon" class="mr10 icon-small" [name]="icon"></tweezers-icon> <span [ngClass]="{'dropdown-description': !!icon}">{{ item[prop] }}</span>
+      <tweezers-icon *ngIf="!!icon" class="mr10 icon-small" [name]="icon"></tweezers-icon>
+      <span [ngClass]="{'dropdown-description': !!icon}">{{ values[item[prop]] }}</span>
     </mat-select-trigger>
     <mat-option *ngIf="allowNone" [value]="null">-None-</mat-option>
     <mat-option *ngFor="let value of values | keyvalue" [value]="value.key">
