@@ -10,72 +10,72 @@
   ></tweezers-single-item-header>
 
   <form class="tweezers-single-item-form">
-    <div *ngFor="let field of fields">
-      <ng-container *ngIf="!!propertyData[field]">
+    <div *ngFor="let pd of propertyData | keyvalue | orderBy:'value.orderNum'">
+      <ng-container *ngIf="!!pd.value">
         <tweezers-text-box
           *ngIf="
-            propertyData[field].type === 'String' ||
-            propertyData[field].type === 'Integer' ||
-            propertyData[field].type === 'Password'
+            pd.value.type === 'String' ||
+            pd.value.type === 'Integer' ||
+            pd.value.type === 'Password'
           "
-          [prop]="field"
-          [header]="propertyData[field].displayName"
+          [prop]="pd.key"
+          [header]="pd.value.displayName"
           [item]="item"
-          [inputType]="propertyData[field].type"
-          [required]="propertyData[field].required"
-          [suffix]="propertyData[field].suffix"
+          [inputType]="pd.value.type"
+          [required]="pd.value.required"
+          [suffix]="pd.value.suffix"
         ></tweezers-text-box>
 
         <tweezers-slider
-          *ngIf="propertyData[field].type === 'Boolean'"
-          [prop]="field"
-          [header]="propertyData[field].displayName"
+          *ngIf="pd.value.type === 'Boolean'"
+          [prop]="pd.key"
+          [header]="pd.value.displayName"
           [item]="item"
-          [required]="propertyData[field].required"
+          [required]="pd.value.required"
         ></tweezers-slider>
 
         <tweezers-dropdown
           *ngIf="
-            propertyData[field].type === 'Enum' ||
-            (propertyData[field].type === 'Object' &&
-              !!propertyData[field].values)
+            pd.value.type === 'Enum' ||
+            (pd.value.type === 'Object' &&
+              !!pd.value.values)
           "
-          [prop]="field"
-          [displayName]="propertyData[field].displayName"
-          [values]="propertyData[field].values.items"
-          [icon]="propertyData[field].values.icon"
+          [prop]="pd.key"
+          [displayName]="pd.value.displayName"
+          [values]="pd.value.values.items"
+          [icon]="pd.value.values.icon"
           [item]="item"
-          [allowNone]="!propertyData[field].required"
+          [allowNone]="!pd.value.required"
         ></tweezers-dropdown>
 
         <tweezers-array
-          *ngIf="propertyData[field].type === 'Array'"
-          [prop]="field"
+          *ngIf="pd.value.type === 'Array'"
+          [prop]="pd.key"
           [objectReference]="
-            propertyData[field].internalFieldData.objectReference
+            pd.value.internalFieldData.objectReference
           "
-          [displayName]="propertyData[field].displayName"
+          [displayName]="pd.value.displayName"
           [item]="item"
-          [required]="propertyData[field].required"
+          [required]="pd.value.required"
         ></tweezers-array>
 
         <tweezers-multiple-select
-          *ngIf="propertyData[field].type === 'TagsArray'"
-          [prop]="field"
-          [displayName]="propertyData[field].displayName"
+          *ngIf="pd.value.type === 'TagsArray'"
+          [prop]="pd.key"
+          [displayName]="pd.value.displayName"
           [item]="item"
         ></tweezers-multiple-select>
 
         <tweezers-internal-object
           *ngIf="
-            propertyData[field].type === 'Object' &&
-            !!propertyData[field].objectReference
+            pd.value.type === 'Object' &&
+            !!pd.value.objectReference
           "
-          [prop]="field"
-          [objectReference]="propertyData[field].objectReference"
-          [displayName]="propertyData[field].displayName"
+          [prop]="pd.key"
+          [objectReference]="pd.value.objectReference"
+          [displayName]="pd.value.displayName"
           [item]="item"
-          [required]="propertyData[field].required"
+          [required]="pd.value.required"
         ></tweezers-internal-object>
       </ng-container>
     </div>

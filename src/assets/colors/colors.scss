@@ -54,7 +54,7 @@ tr.element-row:hover {
 }
 
 .mat-expansion-indicator::after {
-    color: mat-contrast($primaryPalette, 900) !important;
+    color: mat-color($primaryPalette, 900) !important;
 }
 
 .mat-expansion-panel-body {
@@ -71,6 +71,10 @@ tr.element-row:hover {
 
 .error {
     color: #fd4141;
+}
+
+.transparant {
+    color: transparent;
 }
 
 .layout-text-color {

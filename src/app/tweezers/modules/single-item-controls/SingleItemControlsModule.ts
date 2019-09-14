@@ -11,18 +11,34 @@ import { ArrayComponent } from "./array/ArrayComponent";
 import { TweezersInfraModule } from "../infra/TweezersInfraModule";
 import { MultipleSelectComponent } from "./multiple-select/MultipleSelectComponent";
 import { InternalObjectComponent } from "./internal-object/InternalObjectComponent";
+import { PipesModule } from "../../pipes/PipesModule";
 
 @NgModule({
-    imports: [
-        AppRoutingModule,
-        CommonModule,
-        AppMaterialModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserModule,
-        TweezersInfraModule,
-    ],
-    declarations: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent, MultipleSelectComponent, InternalObjectComponent],
-    exports: [TextBoxComponent, DropdownComponent, SliderComponent, ArrayComponent, MultipleSelectComponent, InternalObjectComponent]
+  imports: [
+    AppRoutingModule,
+    CommonModule,
+    AppMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    TweezersInfraModule,
+    PipesModule
+  ],
+  declarations: [
+    TextBoxComponent,
+    DropdownComponent,
+    SliderComponent,
+    ArrayComponent,
+    MultipleSelectComponent,
+    InternalObjectComponent
+  ],
+  exports: [
+    TextBoxComponent,
+    DropdownComponent,
+    SliderComponent,
+    ArrayComponent,
+    MultipleSelectComponent,
+    InternalObjectComponent
+  ]
 })
 export class SingleItemControlsModule {}

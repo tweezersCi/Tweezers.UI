@@ -108,11 +108,13 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
                     const displayName = field.fieldProperties.displayName;
                     const type = field.fieldProperties.fieldType;
                     const suffix = field.fieldProperties.numericSuffix;
+                    const orderNum = field.fieldProperties.orderNum;
 
                     this.propertyData[name] = {
                         displayName,
                         type,
-                        suffix
+                        suffix,
+                        orderNum,
                     };
 
                     this.idFieldName = "_id";
