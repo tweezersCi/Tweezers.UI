@@ -3,62 +3,61 @@
   <mat-divider></mat-divider>
 </mat-list>
 <mat-accordion>
-  <mat-expansion-panel
-    *ngFor="let fieldMetadata of item[prop] | keyvalue"
-    class="force-m10 w80"
-  >
+  <mat-expansion-panel *ngFor="let fieldMetadata of item[prop] | keyvalue | orderBy:'value.fieldProperties.orderNum'"
+    class="force-m10 w80" [expanded]="!!fieldMetadata.value.fieldProperties.expanded" disabled>
     <mat-expansion-panel-header>
-      <mat-panel-title class="expansion-panel-header-text-color">
+      <mat-panel-title class="expansion-panel-header-text-color mt10">
         {{ fieldMetadata.value.fieldProperties.displayName }}
       </mat-panel-title>
+      <div class="actions">
+        <button mat-icon-button [ngClass]="{
+          'error pointer': fieldMetadata.value.fieldProperties.orderNum !== itemLength - 1,
+          'transparant default-cursor': fieldMetadata.value.fieldProperties.orderNum === itemLength - 1
+        }" (click)="moveDown(fieldMetadata.value)" type="button"
+          matTooltip="{{fieldMetadata.value.fieldProperties.orderNum === itemLength - 1 ? '' : 'Move Down'}}">
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
+        <button mat-icon-button [ngClass]="{
+          'error pointer': fieldMetadata.value.fieldProperties.orderNum !== 0,
+          'transparant default-cursor': fieldMetadata.value.fieldProperties.orderNum === 0
+        }" class="" (click)="moveUp(fieldMetadata.value)" type="button"
+          matTooltip="{{fieldMetadata.value.fieldProperties.orderNum === 0 ? '' : 'Move Up'}}">
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+
+        <button mat-icon-button color="primary" class="" (click)="expandCollapse(fieldMetadata.key)" type="button">
+          <mat-icon>{{!!fieldMetadata.value.fieldProperties.expanded ? "expand_less" : "expand_more"}}</mat-icon>
+        </button>
+      </div>
     </mat-expansion-panel-header>
 
     <div *ngFor="let propertyData of internalFields">
-      <tweezers-text-box
-        *ngIf="
+      <tweezers-text-box *ngIf="
           propertyData.fieldProperties.fieldType === 'String' ||
           propertyData.fieldProperties.fieldType === 'Integer' ||
           propertyData.fieldProperties.fieldType === 'Password'
-        "
-        [prop]="propertyData.fieldProperties.name"
-        [header]="propertyData.fieldProperties.displayName"
-        [item]="fieldMetadata.value.fieldProperties"
-        [inputType]="propertyData.fieldProperties.fieldType"
-        [required]="propertyData.fieldProperties.required"
-      ></tweezers-text-box>
+        " [prop]="propertyData.fieldProperties.name" [header]="propertyData.fieldProperties.displayName"
+        [item]="fieldMetadata.value.fieldProperties" [inputType]="propertyData.fieldProperties.fieldType"
+        [required]="propertyData.fieldProperties.required"></tweezers-text-box>
 
-      <tweezers-slider
-        *ngIf="propertyData.fieldProperties.fieldType === 'Boolean'"
-        [prop]="propertyData.fieldProperties.name"
-        [header]="propertyData.fieldProperties.displayName"
-        [item]="fieldMetadata.value.fieldProperties"
-      ></tweezers-slider>
+      <tweezers-slider *ngIf="propertyData.fieldProperties.fieldType === 'Boolean'"
+        [prop]="propertyData.fieldProperties.name" [header]="propertyData.fieldProperties.displayName"
+        [item]="fieldMetadata.value.fieldProperties"></tweezers-slider>
 
       <tweezers-dropdown
         *ngIf="propertyData.fieldProperties.fieldType === 'Enum' && possibleValuesDict[propertyData.fieldProperties.name]"
-        [prop]="propertyData.fieldProperties.name"
-        [displayName]="propertyData.fieldProperties.displayName"
+        [prop]="propertyData.fieldProperties.name" [displayName]="propertyData.fieldProperties.displayName"
         [values]="possibleValuesDict[propertyData.fieldProperties.name].items"
-        [icon]="possibleValuesDict[propertyData.fieldProperties.name].icon"
-        [item]="fieldMetadata.value.fieldProperties"
-        [allowNone]="!propertyData.fieldProperties.required"
-      ></tweezers-dropdown>
+        [icon]="possibleValuesDict[propertyData.fieldProperties.name].icon" [item]="fieldMetadata.value.fieldProperties"
+        [allowNone]="!propertyData.fieldProperties.required"></tweezers-dropdown>
 
-      <tweezers-multiple-select
-        *ngIf="propertyData.fieldProperties.fieldType === 'TagsArray'"
-        [prop]="propertyData.fieldProperties.name"
-        [displayName]="propertyData.fieldProperties.displayName"
-        [item]="fieldMetadata.value.fieldProperties"
-      ></tweezers-multiple-select>
+      <tweezers-multiple-select *ngIf="propertyData.fieldProperties.fieldType === 'TagsArray'"
+        [prop]="propertyData.fieldProperties.name" [displayName]="propertyData.fieldProperties.displayName"
+        [item]="fieldMetadata.value.fieldProperties"></tweezers-multiple-select>
     </div>
 
     <mat-action-row>
-      <button
-        mat-button
-        color="warn"
-        type="button"
-        (click)="deleteItem(fieldMetadata.key)"
-      >
+      <button mat-button color="warn" type="button" (click)="deleteItem(fieldMetadata.key)">
         Delete
       </button>
     </mat-action-row>
