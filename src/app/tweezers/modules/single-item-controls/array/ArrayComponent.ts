@@ -31,6 +31,8 @@ export class ArrayComponent extends BaseComponent {
       (f: any) => !f.fieldProperties.uiIgnore
     );
 
+    this.item[this.prop] = this.item[this.prop] || {};
+
     const entities: any[] = Object.values(this.item[this.prop]);
     for (const entity of entities) {
       entity.fieldProperties.expanded = false;
@@ -42,8 +44,6 @@ export class ArrayComponent extends BaseComponent {
         field.fieldProperties.name
       ] = await this.constructPossibleValues(field);
     }
-
-    this.item[this.prop] = this.item[this.prop] || {};
   }
 
   onChange(e) {}

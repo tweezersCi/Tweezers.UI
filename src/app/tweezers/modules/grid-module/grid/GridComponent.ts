@@ -146,7 +146,7 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
     }
 
     stringify(item: any, field: string) {
-        if (!item[field]) {
+        if (item[field] === undefined || item[field] === null) {
             return "";
         }
 
