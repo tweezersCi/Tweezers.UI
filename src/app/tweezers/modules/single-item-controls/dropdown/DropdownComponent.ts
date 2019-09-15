@@ -13,6 +13,7 @@ export class DropdownComponent extends BaseComponent {
     @Input() item: any;
     @Input() allowNone: boolean;
     @Input() icon = "";
+    @Input() referenceLink = "";
 
     fieldKeys: string[];
 
@@ -22,5 +23,12 @@ export class DropdownComponent extends BaseComponent {
     onChange(e) {
         const newValue = e.value;
         this.item[this.prop] = newValue;
+    }
+
+    navigateToItem() {
+        const url = `${this.referenceLink}/${this.item[this.prop]}`;
+        this.router.navigate([url], {}).then((res) => {
+            window.location.reload();
+        });
     }
 }

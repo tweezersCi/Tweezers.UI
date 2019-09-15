@@ -6,9 +6,12 @@
       <span [ngClass]="{'dropdown-description': !!icon}">{{ values[item[prop]] }}</span>
     </mat-select-trigger>
     <mat-option *ngIf="allowNone" [value]="null">-None-</mat-option>
-    <mat-option *ngFor="let value of values | keyvalue" [value]="value.key">
+    <mat-option *ngFor="let value of values | keyvalue | orderBy:'value'" [value]="value.key">
       <tweezers-icon *ngIf="!!icon" class="mr10" [name]="icon"></tweezers-icon>
       {{ value.value }}
     </mat-option>
   </mat-select>
 </mat-form-field>
+<button mat-icon-button *ngIf="referenceLink && item[prop]" class="" (click)="navigateToItem()" type="button" matTooltip="Navigate to entity">
+  <mat-icon>play_arrow</mat-icon>
+</button>

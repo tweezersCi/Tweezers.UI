@@ -122,7 +122,7 @@ export class SingleItemComponent extends BaseComponent {
             const objectReference = field.fieldProperties.objectReference;
             const suffix = field.fieldProperties.numericSuffix;
             const orderNum = field.fieldProperties.orderNum;
-
+            const objName = field.fieldProperties.objectName;
             const values = await this.constructPossibleValues(field);
 
             this.propertyData[name] = {
@@ -134,6 +134,7 @@ export class SingleItemComponent extends BaseComponent {
               objectReference,
               suffix,
               orderNum,
+              objName,
             };
           });
 

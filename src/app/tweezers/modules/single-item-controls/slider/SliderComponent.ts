@@ -12,6 +12,12 @@ export class SliderComponent extends BaseComponent {
     @Input() item: any;
     @Input() required = false;
 
+    ngOnInit(): void {
+        if (this.item[this.prop] === undefined || this.item[this.prop] === null) {
+            this.item[this.prop] = false;
+        }
+    }
+
     onChange(e) {
         const newValue = e.checked;
         this.item[this.prop] = newValue;
